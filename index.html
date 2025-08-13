@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharif Connect</title>
-    <script src="tailwindcss.js"></script>
+    <script src="assets/js/tailwindcss.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -532,10 +532,11 @@
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const remember_me = true
             const errorDiv = document.getElementById('login-error');
 
             try {
-                const result = await pywebview.api.login(username, password);
+                const result = await pywebview.api.login(username, password,remember_me);
                 if (result.success) {
                     isLoggedIn = true;
                     showPage('dashboard');
