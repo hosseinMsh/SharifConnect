@@ -1,10 +1,12 @@
 import webview
-import os
 import json
 from pathlib import Path
 import time
 
+from utils.configurations import load_config, save_config
 from utils.connection.network import check_sharif_network
+
+config = load_config()
 
 
 class SharifConnectAPI:
@@ -12,15 +14,20 @@ class SharifConnectAPI:
         self.connected = False
         self.current_language = 'fa'
         self.logged_in = False
-        self.username = ''
         self.password = ''
+        self.username = ''
+        self.remember_me = False
+        if config.get("remember"):
+            self.username = config.get("username", "")
+            self.password = config.get("password", "")
+            self.remember_me = True
         self.state = -1
         self.load_languages()
 
     def load_languages(self):
         """Load language files"""
         try:
-            with open('languages.json', 'r', encoding='utf-8') as f:
+            with open('assets/lang/languages.json', 'r', encoding='utf-8') as f:
                 self.languages = json.load(f)
         except FileNotFoundError:
             # Fallback if language file doesn't exist
@@ -43,13 +50,15 @@ class SharifConnectAPI:
             return True
         return False
 
-    def login(self, username, password):
+    def login(self, username, password, remember_me):
         """Login to Sharif Connect"""
         # Simulate login validation
         if username and password:
             self.logged_in = True
             self.username = username
             self.password = password
+            self.remember_me = remember_me
+            save_config({"username": username, "password": password, "remember": remember_me})
             return {
                 'success': True,
                 'message': 'Login successful',
@@ -59,6 +68,10 @@ class SharifConnectAPI:
             'success': False,
             'message': 'Invalid credentials'
         }
+    def logout(self):
+        """Logout from Sharif Connect"""
+        self.logged_in = False
+        return {}
 
     def profile(self):
         """Get user profile information"""
@@ -67,12 +80,12 @@ class SharifConnectAPI:
 
         return {
             'username': self.username,
-            'plan': 'Premium',
-            'expires': '2024-12-31',
-            'data_used': '45.2 GB',
-            'data_limit': '100 GB',
-            'account_type': 'Student',
-            'registration_date': '2024-01-01'
+            'group_name': 'Premium',
+            'group_speed': '2024-12-31',
+            'group_volume': '45.2 GB',
+            'charge_date': '100 GB',
+            'volume_remaining': 'Student',
+            'volume_used': '2024-01-01'
         }
 
     def info(self):
@@ -129,7 +142,7 @@ class SharifConnectAPI:
     def connect(self):
         """Connect to VPN"""
         if not self.logged_in:
-            return {'success': False, 'message': 'Please login first'}
+            return {'success': False, 'message': 'Please login again'}
 
         self.connected = True
         return {
