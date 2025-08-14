@@ -1,0 +1,37 @@
+<div id="profile" class="page p-4 sm:p-6 lg:p-8">
+    <div class="flex items-center justify-between mb-6 sm:mb-8">
+        <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+            <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+            </button>
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="profile">پروفایل</h1>
+        </div>
+    </div>
+
+    <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center mb-4 sm:mb-6">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2" data-lang="premium_user" id="profile-name">کاربر ویژه</h3>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm" id="profile-details">
+            <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="subscription_details">جزئیات اشتراک</h4>
+            <div class="space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-xs sm:text-sm text-gray-600" data-lang="plan">طرح</span>
+                    <span class="text-xs sm:text-sm font-medium text-gray-800">شریف کانکت ویژه</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-xs sm:text-sm text-gray-600" data-lang="status">وضعیت</span>
+                    <span class="text-xs sm:text-sm font-medium text-sharif-green" data-lang="active">فعال</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharif Connect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/tailwindcss.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sharif-blue': '#1E40AF',
+                        'sharif-green': '#10B981',
+                        'sharif-gray': '#F3F4F6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 rtl">
+    <div id="app-container" class="app-container bg-gray-100">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+    
+    <!-- Pywebview ready handler -->
+    <script>
+        window.addEventListener('pywebviewready', function () {
+            if (window.pywebview && window.pywebview.api) {
+                window.pywebview.api.config_data().then(function (config) {
+                    const usernameField = document.getElementById("username");
+                    const passwordField = document.getElementById("password");
+                    if (usernameField && config.username) usernameField.value = config.username;
+                    if (passwordField && config.password) passwordField.value = config.password;
+                }).catch(function(error) {
+                    console.error('Failed to load config:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

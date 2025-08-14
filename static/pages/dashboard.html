@@ -1,0 +1,85 @@
+<div id="dashboard" class="page p-4 sm:p-6 lg:p-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6 sm:mb-8">
+        <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+            <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+            </button>
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="app_name">شریف کانکت</h1>
+        </div>
+        <div class="flex items-center space-x-2 space-x-reverse">
+            <div class="w-2 h-2 bg-sharif-green rounded-full" id="status-indicator"></div>
+            <span class="text-xs sm:text-sm text-gray-600" id="connection-text" data-lang="disconnected">قطع شده</span>
+        </div>
+    </div>
+
+    <!-- Protection Status -->
+    <div class="text-center mb-6 sm:mb-8">
+        <div class="relative inline-block mb-4">
+            <div class="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-sharif-green rounded-full flex items-center justify-center bg-white shadow-lg"
+                 id="protection-circle">
+                <svg class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                          d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+        <h2 class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-2" data-lang="full_protection">حفاظت کامل</h2>
+        <p class="text-sm sm:text-base text-gray-600 max-w-xs mx-auto px-4" data-lang="protection_desc">اتصال شما رمزگذاری شده و امن است</p>
+    </div>
+
+    <!-- VPN Toggle -->
+    <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-sharif-blue rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="secure_connection">اتصال امن</h3>
+                    <p class="text-xs sm:text-sm text-gray-500" data-lang="unlimited_data">داده نامحدود</p>
+                </div>
+            </div>
+            <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                 onclick="toggleConnection(this)" id="main-toggle">
+                <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Server Info -->
+    <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs sm:text-sm text-gray-600" data-lang="server_location">موقعیت سرور</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 space-x-reverse">
+                <div class="w-5 h-3 sm:w-6 sm:h-4 bg-gradient-to-b from-green-500 via-white to-red-500 rounded"></div>
+                <span class="text-sm sm:text-base font-medium text-gray-800" id="server-location">تهران، ایران</span>
+            </div>
+        </div>
+        <p class="text-xs text-gray-500 mt-2" id="current-ip" data-lang="your_ip">آی‌پی شما: ---.---.---.---</p>
+    </div>
+
+    <!-- Data Usage -->
+    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+        <h3 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="data_transferred">داده منتقل شده</h3>
+        <div class="flex justify-between items-end">
+            <div>
+                <p class="text-xs text-gray-500" data-lang="today">امروز</p>
+                <p class="text-xl sm:text-2xl font-bold text-gray-800" id="today-data">0 MB</p>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500" data-lang="this_week">این هفته</p>
+                <p class="text-xl sm:text-2xl font-bold text-gray-800" id="week-data">0 GB</p>
+            </div>
+        </div>
+    </div>
+</div>

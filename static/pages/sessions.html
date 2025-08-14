@@ -1,0 +1,28 @@
+<div id="sessions" class="page p-4 sm:p-6 lg:p-8">
+    <div class="flex items-center justify-between mb-6 sm:mb-8">
+        <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+            <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+            </button>
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="sessions">جلسات</h1>
+        </div>
+    </div>
+
+    <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="session_history">تاریخچه جلسات</h3>
+            <select onchange="loadSessions(this.value)"
+                    class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                <option value="3">3 جلسه اخیر</option>
+                <option value="2">2 جلسه اخیر</option>
+                <option value="1">1 جلسه اخیر</option>
+                <option value="0">هیچ جلسه‌ای</option>
+            </select>
+        </div>
+        <div class="space-y-3" id="sessions-list">
+            <!-- Sessions will be loaded here -->
+        </div>
+    </div>
+</div>
