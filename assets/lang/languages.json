@@ -109,6 +109,12 @@
     "contact": "Contact",
     "language": "Language",
     "persian": "فارسی",
-    "english": "English"
+    "english": "English",
+    "gender" : "Gender",
+    "mobile" : "Mobile",
+    "account_status" : "Account status",
+    "param" : "Param",
+    "fullname" : "Name",
+    "username" : "Username"
   }
 }

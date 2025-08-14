@@ -23,49 +23,63 @@
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.9);
         }
+
         .toggle-switch {
             transition: all 0.3s ease;
         }
+
         .toggle-switch.active {
             background-color: #10B981;
         }
+
         .hamburger-line {
             transition: all 0.3s ease;
         }
+
         .hamburger-menu.active .hamburger-line:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
+
         .hamburger-menu.active .hamburger-line:nth-child(2) {
             opacity: 0;
         }
+
         .hamburger-menu.active .hamburger-line:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
         }
+
         .menu-overlay {
             transform: translateX(-100%);
             transition: transform 0.3s ease;
         }
+
         .menu-overlay.active {
             transform: translateX(0);
         }
+
         .page {
             display: none;
         }
+
         .page.active {
             display: block;
         }
+
         .rtl {
             direction: rtl;
         }
+
         .ltr {
             direction: ltr;
         }
+
         /* Added responsive container styles */
         .app-container {
             min-height: 100vh;
             max-width: 100vw;
             overflow-x: hidden;
         }
+
         @media (min-width: 768px) {
             .app-container {
                 max-width: 800px;
@@ -75,6 +89,7 @@
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             }
         }
+
         @media (min-width: 1024px) {
             .app-container {
                 max-width: 900px;
@@ -85,687 +100,768 @@
 </head>
 <!-- Removed fixed width/height, made body responsive -->
 <body class="bg-gray-100 rtl">
-    <!-- Login Page -->
-    <div id="login" class="page active p-4 sm:p-6 lg:p-8">
-        <div class="app-container bg-gray-100 min-h-screen flex items-center justify-center">
-            <div class="max-w-md w-full bg-white rounded-xl p-6 sm:p-8 shadow-lg">
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h1 class="text-2xl font-bold text-gray-800 mb-2" data-lang="app_name">شریف کانکت</h1>
-                    <p class="text-sm text-gray-600" data-lang="login_desc">وارد حساب کاربری خود شوید</p>
+<!-- Login Page -->
+<div id="login" class="page active p-4 sm:p-6 lg:p-8">
+    <div class="app-container bg-gray-100 min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"></path>
+                    </svg>
                 </div>
-
-                <form onsubmit="handleLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-lang="username">نام کاربری</label>
-                        <input type="text" id="username" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue" placeholder="user@sharif.edu">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-lang="password">رمز عبور</label>
-                        <input type="password" id="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
-                    </div>
-                    <button type="submit" class="w-full bg-sharif-blue text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors" data-lang="login">ورود</button>
-                </form>
-
-                <div id="login-error" class="mt-4 text-red-600 text-sm text-center hidden"></div>
-
-                <!-- Language Switcher -->
-                <div class="mt-6 pt-4 border-t border-gray-200">
-                    <div class="flex items-center justify-center space-x-2 space-x-reverse">
-                        <button onclick="switchLanguage('fa')" class="px-3 py-1 text-sm rounded-md bg-sharif-blue text-white" id="login-lang-fa">فا</button>
-                        <button onclick="switchLanguage('en')" class="px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700" id="login-lang-en">En</button>
-                    </div>
-                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2" data-lang="app_name">شریف کانکت</h1>
+                <p class="text-sm text-gray-600" data-lang="login_desc">وارد حساب کاربری خود شوید</p>
             </div>
-        </div>
-    </div>
 
-    <!-- Menu Overlay -->
-    <!-- Made menu overlay responsive with proper padding -->
-    <div class="menu-overlay fixed inset-0 bg-white z-50 p-4 sm:p-6">
-        <div class="flex items-center justify-between mb-6 sm:mb-8">
-            <h2 class="text-xl sm:text-2xl font-bold text-gray-800" data-lang="app_name">شریف کانکت</h2>
-            <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                <div class="hamburger-line w-6 h-0.5 bg-gray-800 mb-1"></div>
-                <div class="hamburger-line w-6 h-0.5 bg-gray-800 mb-1"></div>
-                <div class="hamburger-line w-6 h-0.5 bg-gray-800"></div>
-            </button>
-        </div>
-        <!-- Made navigation responsive with better spacing -->
-        <nav class="space-y-3 sm:space-y-4">
-            <a href="#" onclick="showPage('dashboard')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="dashboard">داشبورد</span>
-            </a>
-            <a href="#" onclick="showPage('settings')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="settings">تنظیمات</span>
-            </a>
-            <a href="#" onclick="showPage('profile')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="profile">پروفایل</span>
-            </a>
-            <a href="#" onclick="showPage('sessions')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="sessions">جلسات</span>
-            </a>
-            <a href="#" onclick="showPage('logs')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="logs">گزارش‌ها</span>
-            </a>
-            <a href="#" onclick="showPage('about')" class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-base sm:text-lg text-gray-800" data-lang="about">درباره ما</span>
-            </a>
-        </nav>
-
-        <!-- Language Switcher -->
-        <!-- Made language switcher responsive -->
-        <div class="mt-6 sm:mt-8 pt-4 border-t border-gray-200">
-            <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600" data-lang="language">زبان</span>
-                <div class="flex space-x-2 space-x-reverse">
-                    <button onclick="switchLanguage('fa')" class="px-3 py-1 text-sm rounded-md bg-sharif-blue text-white" id="lang-fa">فا</button>
-                    <button onclick="switchLanguage('en')" class="px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700" id="lang-en">En</button>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-lang="username">نام کاربری</label>
+                    <input type="text" id="username" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue"
+                           placeholder="user@sharif.edu"
+                    >
                 </div>
-            </div>
-        </div>
-    </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-lang="password">رمز عبور</label>
+                    <input type="password" id="password" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                </div>
+                <button type="submit"
+                        class="w-full bg-sharif-blue text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                        data-lang="login">ورود
+                </button>
+            </form>
 
-    <!-- Added responsive app container -->
-    <div class="app-container bg-gray-100">
-        <!-- Dashboard Page -->
-        <!-- Made all pages responsive with proper padding -->
-        <div id="dashboard" class="page p-4 sm:p-6 lg:p-8">
-            <!-- Header -->
-            <!-- Made header responsive -->
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+            <div id="login-error" class="mt-4 text-red-600 text-sm text-center hidden"></div>
+
+            <!-- Language Switcher -->
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <div class="flex items-center justify-center space-x-2 space-x-reverse">
+                    <button onclick="switchLanguage('fa')"
+                            class="px-3 py-1 text-sm rounded-md bg-sharif-blue text-white" id="login-lang-fa">فا
                     </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="app_name">شریف کانکت</h1>
-                </div>
-                <div class="flex items-center space-x-2 space-x-reverse">
-                    <div class="w-2 h-2 bg-sharif-green rounded-full" id="status-indicator"></div>
-                    <span class="text-xs sm:text-sm text-gray-600" id="connection-text" data-lang="disconnected">قطع شده</span>
+                    <button onclick="switchLanguage('en')"
+                            class="px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700" id="login-lang-en">En
+                    </button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Protection Status -->
-            <!-- Made protection status responsive -->
-            <div class="text-center mb-6 sm:mb-8">
-                <div class="relative inline-block mb-4">
-                    <div class="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-sharif-green rounded-full flex items-center justify-center bg-white shadow-lg" id="protection-circle">
-                        <svg class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+<!-- Menu Overlay -->
+<!-- Made menu overlay responsive with proper padding -->
+<div class="menu-overlay fixed inset-0 bg-white z-50 p-4 sm:p-6">
+    <div class="flex items-center justify-between mb-6 sm:mb-8">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-800" data-lang="app_name">شریف کانکت</h2>
+        <button onclick="toggleMenu()" class="hamburger-menu p-2">
+            <div class="hamburger-line w-6 h-0.5 bg-gray-800 mb-1"></div>
+            <div class="hamburger-line w-6 h-0.5 bg-gray-800 mb-1"></div>
+            <div class="hamburger-line w-6 h-0.5 bg-gray-800"></div>
+        </button>
+    </div>
+    <!-- Made navigation responsive with better spacing -->
+    <nav class="space-y-3 sm:space-y-4">
+        <a href="#" onclick="showPage('dashboard')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="dashboard">داشبورد</span>
+        </a>
+        <a href="#" onclick="showPage('settings')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="settings">تنظیمات</span>
+        </a>
+        <a href="#" onclick="showPage('profile')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="profile">پروفایل</span>
+        </a>
+        <a href="#" onclick="showPage('sessions')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="sessions">جلسات</span>
+        </a>
+        <a href="#" onclick="showPage('logs')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="logs">گزارش‌ها</span>
+        </a>
+        <a href="#" onclick="showPage('about')"
+           class="flex items-center space-x-3 space-x-reverse p-3 sm:p-4 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sharif-blue" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-base sm:text-lg text-gray-800" data-lang="about">درباره ما</span>
+        </a>
+    </nav>
+
+    <!-- Language Switcher -->
+    <!-- Made language switcher responsive -->
+    <div class="mt-6 sm:mt-8 pt-4 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600" data-lang="language">زبان</span>
+            <div class="flex space-x-2 space-x-reverse">
+                <button onclick="switchLanguage('fa')" class="px-3 py-1 text-sm rounded-md bg-sharif-blue text-white"
+                        id="lang-fa">فا
+                </button>
+                <button onclick="switchLanguage('en')" class="px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700"
+                        id="lang-en">En
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Added responsive app container -->
+<div class="app-container bg-gray-100">
+    <!-- Dashboard Page -->
+    <!-- Made all pages responsive with proper padding -->
+    <div id="dashboard" class="page p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <!-- Made header responsive -->
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="app_name">شریف کانکت</h1>
+            </div>
+            <div class="flex items-center space-x-2 space-x-reverse">
+                <div class="w-2 h-2 bg-sharif-green rounded-full" id="status-indicator"></div>
+                <span class="text-xs sm:text-sm text-gray-600" id="connection-text"
+                      data-lang="disconnected">قطع شده</span>
+            </div>
+        </div>
+
+        <!-- Protection Status -->
+        <!-- Made protection status responsive -->
+        <div class="text-center mb-6 sm:mb-8">
+            <div class="relative inline-block mb-4">
+                <div class="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-sharif-green rounded-full flex items-center justify-center bg-white shadow-lg"
+                     id="protection-circle">
+                    <svg class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-gray-800" fill="currentColor"
+                         viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-2" data-lang="full_protection">
+                حفاظت کامل</h2>
+            <p class="text-sm sm:text-base text-gray-600 max-w-xs mx-auto px-4" data-lang="protection_desc">اتصال شما
+                رمزگذاری شده و امن است</p>
+        </div>
+
+        <!-- VPN Toggle -->
+        <!-- Made VPN toggle responsive -->
+        <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-sharif-blue rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                </div>
-                <h2 class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-2" data-lang="full_protection">حفاظت کامل</h2>
-                <p class="text-sm sm:text-base text-gray-600 max-w-xs mx-auto px-4" data-lang="protection_desc">اتصال شما رمزگذاری شده و امن است</p>
-            </div>
-
-            <!-- VPN Toggle -->
-            <!-- Made VPN toggle responsive -->
-            <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3 space-x-reverse">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-sharif-blue rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="secure_connection">اتصال امن</h3>
-                            <p class="text-xs sm:text-sm text-gray-500" data-lang="unlimited_data">داده نامحدود</p>
-                        </div>
+                    <div>
+                        <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="secure_connection">اتصال
+                            امن</h3>
+                        <p class="text-xs sm:text-sm text-gray-500" data-lang="unlimited_data">داده نامحدود</p>
                     </div>
-                    <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer" onclick="toggleConnection(this)" id="main-toggle">
+                </div>
+                <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                     onclick="toggleConnection(this)" id="main-toggle">
+                    <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Server Info -->
+        <!-- Made server info responsive -->
+        <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-xs sm:text-sm text-gray-600" data-lang="server_location">موقعیت سرور</span>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <div class="w-5 h-3 sm:w-6 sm:h-4 bg-gradient-to-b from-green-500 via-white to-red-500 rounded"></div>
+                    <span class="text-sm sm:text-base font-medium text-gray-800"
+                          id="server-location">تهران، ایران</span>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-2" id="current-ip" data-lang="your_ip">آی‌پی شما: ---.---.---.---</p>
+        </div>
+
+        <!-- Data Usage -->
+        <!-- Made data usage responsive -->
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm max-w-full sm:max-w-md mx-auto">
+            <h3 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="data_transferred">داده منتقل
+                شده</h3>
+            <div class="flex justify-between items-end">
+                <div>
+                    <p class="text-xs text-gray-500" data-lang="today">امروز</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-800" id="today-data">0 MB</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500" data-lang="this_week">این هفته</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-800" id="week-data">0 GB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <!-- Made settings page responsive -->
+    <div id="settings" class="page p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="settings">تنظیمات</h1>
+            </div>
+        </div>
+
+        <!-- Made settings content responsive -->
+        <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto space-y-4">
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm sm:text-base font-medium text-gray-800"
+                          data-lang="auto_connect">اتصال خودکار</span>
+                    <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                         onclick="toggleSetting(this)">
                         <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
                     </div>
                 </div>
+                <p class="text-xs sm:text-sm text-gray-500" data-lang="auto_connect_desc">اتصال خودکار هنگام پیوستن به
+                    شبکه‌های غیرقابل اعتماد</p>
             </div>
 
-            <!-- Server Info -->
-            <!-- Made server info responsive -->
-            <div class="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm max-w-full sm:max-w-md mx-auto">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs sm:text-sm text-gray-600" data-lang="server_location">موقعیت سرور</span>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-2 space-x-reverse">
-                        <div class="w-5 h-3 sm:w-6 sm:h-4 bg-gradient-to-b from-green-500 via-white to-red-500 rounded"></div>
-                        <span class="text-sm sm:text-base font-medium text-gray-800" id="server-location">تهران، ایران</span>
-                    </div>
-                </div>
-                <p class="text-xs text-gray-500 mt-2" id="current-ip" data-lang="your_ip">آی‌پی شما: ---.---.---.---</p>
-            </div>
-
-            <!-- Data Usage -->
-            <!-- Made data usage responsive -->
-            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm max-w-full sm:max-w-md mx-auto">
-                <h3 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="data_transferred">داده منتقل شده</h3>
-                <div class="flex justify-between items-end">
-                    <div>
-                        <p class="text-xs text-gray-500" data-lang="today">امروز</p>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-800" id="today-data">0 MB</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500" data-lang="this_week">این هفته</p>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-800" id="week-data">0 GB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Settings Page -->
-        <!-- Made settings page responsive -->
-        <div id="settings" class="page p-4 sm:p-6 lg:p-8">
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
-                    </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="settings">تنظیمات</h1>
-                </div>
-            </div>
-
-            <!-- Made settings content responsive -->
-            <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto space-y-4">
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="auto_connect">اتصال خودکار</span>
-                        <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer" onclick="toggleSetting(this)">
-                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm text-gray-500" data-lang="auto_connect_desc">اتصال خودکار هنگام پیوستن به شبکه‌های غیرقابل اعتماد</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="kill_switch">کلید قطع</span>
-                        <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer" onclick="toggleSetting(this)">
-                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm text-gray-500" data-lang="kill_switch_desc">مسدود کردن اینترنت در صورت قطع اتصال VPN</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="start_on_boot">شروع با سیستم</span>
-                        <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer" onclick="toggleSetting(this)">
-                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm text-gray-500" data-lang="start_on_boot_desc">اجرای شریف کانکت هنگام شروع سیستم</p>
-                </div>
-
-                <!-- Added start with OS setting -->
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="start_with_os">شروع با سیستم عامل</span>
-                        <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer" onclick="toggleSetting(this, 'start_with_os')">
-                            <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm text-gray-500" data-lang="start_with_os_desc">اجرای خودکار شریف کانکت هنگام شروع سیستم عامل</p>
-                </div>
-
-                <!-- Added change password section -->
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="change_credentials">تغییر اطلاعات کاربری</h4>
-                    <form onsubmit="handleChangeCredentials(event)" class="space-y-3">
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1" data-lang="current_password">رمز عبور فعلی</label>
-                            <input type="password" id="current-password" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1" data-lang="new_username">نام کاربری جدید (اختیاری)</label>
-                            <input type="text" id="new-username" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-600 mb-1" data-lang="new_password">رمز عبور جدید (اختیاری)</label>
-                            <input type="password" id="new-password" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
-                        </div>
-                        <button type="submit" class="w-full bg-sharif-blue text-white py-2 px-4 text-sm rounded-lg hover:bg-blue-700 transition-colors" data-lang="update_credentials">به‌روزرسانی اطلاعات</button>
-                    </form>
-                    <div id="change-result" class="mt-2 text-sm text-center hidden"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Profile Page -->
-        <div id="profile" class="page p-4 sm:p-6 lg:p-8">
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
-                    </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="profile">پروفایل</h1>
-                </div>
-            </div>
-
-            <!-- Made profile content responsive -->
-            <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center mb-4 sm:mb-6">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2" data-lang="premium_user">کاربر ویژه</h3>
-                    <p class="text-xs sm:text-sm text-gray-500"><span data-lang="active_since">فعال از</span> دی ۱۴۰۲</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm" id="profile-details">
-                    <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="subscription_details">جزئیات اشتراک</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="plan">طرح</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">شریف کانکت ویژه</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="status">وضعیت</span>
-                            <span class="text-xs sm:text-sm font-medium text-sharif-green" data-lang="active">فعال</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="next_billing">صورتحساب بعدی</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">۱۵ اسفند ۱۴۰۲</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sessions Page -->
-        <div id="sessions" class="page p-4 sm:p-6 lg:p-8">
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
-                    </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="sessions">جلسات</h1>
-                </div>
-            </div>
-
-            <!-- Made sessions content responsive -->
-            <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
-                <!-- Added session count selector -->
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="session_history">تاریخچه جلسات</h3>
-                    <select onchange="loadSessions(this.value)" class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
-                        <option value="3">3 جلسه اخیر</option>
-                        <option value="2">2 جلسه اخیر</option>
-                        <option value="1">1 جلسه اخیر</option>
-                        <option value="0">هیچ جلسه‌ای</option>
-                    </select>
+                    <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="kill_switch">کلید قطع</span>
+                    <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                         onclick="toggleSetting(this)">
+                        <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+                    </div>
                 </div>
-                <div class="space-y-3" id="sessions-list">
-                    <!-- Sessions will be loaded here -->
+                <p class="text-xs sm:text-sm text-gray-500" data-lang="kill_switch_desc">مسدود کردن اینترنت در صورت قطع
+                    اتصال VPN</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm sm:text-base font-medium text-gray-800"
+                          data-lang="start_on_boot">شروع با سیستم</span>
+                    <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                         onclick="toggleSetting(this)">
+                        <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+                    </div>
                 </div>
+                <p class="text-xs sm:text-sm text-gray-500" data-lang="start_on_boot_desc">اجرای شریف کانکت هنگام شروع
+                    سیستم</p>
+            </div>
+
+            <!-- Added start with OS setting -->
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm sm:text-base font-medium text-gray-800" data-lang="start_with_os">شروع با سیستم عامل</span>
+                    <div class="toggle-switch w-10 h-5 sm:w-12 sm:h-6 bg-gray-300 rounded-full relative cursor-pointer"
+                         onclick="toggleSetting(this, 'start_with_os')">
+                        <div class="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+                    </div>
+                </div>
+                <p class="text-xs sm:text-sm text-gray-500" data-lang="start_with_os_desc">اجرای خودکار شریف کانکت هنگام
+                    شروع سیستم عامل</p>
+            </div>
+
+            <!-- Added change password section -->
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="change_credentials">تغییر
+                    اطلاعات کاربری</h4>
+                <form onsubmit="handleChangeCredentials(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1" data-lang="current_password">رمز عبور
+                            فعلی</label>
+                        <input type="password" id="current-password" required
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1" data-lang="new_username">نام کاربری جدید
+                            (اختیاری)</label>
+                        <input type="text" id="new-username"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1" data-lang="new_password">رمز عبور جدید
+                            (اختیاری)</label>
+                        <input type="password" id="new-password"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-sharif-blue text-white py-2 px-4 text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                            data-lang="update_credentials">به‌روزرسانی اطلاعات
+                    </button>
+                </form>
+                <div id="change-result" class="mt-2 text-sm text-center hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile" class="page p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="profile">پروفایل</h1>
             </div>
         </div>
 
-        <!-- Logs Page -->
-        <div id="logs" class="page p-4 sm:p-6 lg:p-8">
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
-                    </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="logs">گزارش‌ها</h1>
+        <!-- Made profile content responsive -->
+        <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center mb-4 sm:mb-6">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                              clip-rule="evenodd"></path>
+                    </svg>
                 </div>
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2" data-lang="premium_user" id="profile-name">کاربر ویژه</h3>
             </div>
 
-            <!-- Made logs content responsive -->
-            <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
-                <h3 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="application_logs">گزارش‌های برنامه</h3>
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="space-y-2 text-xs sm:text-sm font-mono" id="logs-list">
-                        <!-- Logs will be loaded here -->
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm" id="profile-details">
+                <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="subscription_details">جزئیات
+                    اشتراک</h4>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-xs sm:text-sm text-gray-600" data-lang="plan">طرح</span>
+                        <span class="text-xs sm:text-sm font-medium text-gray-800">شریف کانکت ویژه</span>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- About Page -->
-        <div id="about" class="page p-4 sm:p-6 lg:p-8">
-            <div class="flex items-center justify-between mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
-                    <button onclick="toggleMenu()" class="hamburger-menu p-2">
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
-                        <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
-                    </button>
-                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="about">درباره ما</h1>
-                </div>
-            </div>
-
-            <!-- Made about content responsive -->
-            <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center mb-4 sm:mb-6">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
+                    <div class="flex justify-between">
+                        <span class="text-xs sm:text-sm text-gray-600" data-lang="status">وضعیت</span>
+                        <span class="text-xs sm:text-sm font-medium text-sharif-green" data-lang="active">فعال</span>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2" data-lang="about_title">درباره شریف کانکت</h3>
-                    <p class="text-xs sm:text-sm text-gray-500" data-lang="about_desc">شریف کانکت یک سرویس VPN امن و سریع است که توسط دانشگاه صنعتی شریف توسعه یافته است.</p>
-                </div>
-
-                <!-- Updated about content with info from API -->
-                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
-                    <div class="space-y-3" id="app-info">
-                        <!-- App info will be loaded here -->
+                    <div class="flex justify-between">
+                        <span class="text-xs sm:text-sm text-gray-600" data-lang="next_billing">صورتحساب بعدی</span>
+                        <span class="text-xs sm:text-sm font-medium text-gray-800">۱۵ اسفند ۱۴۰۲</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        let currentLanguage = 'fa';
-        let languageData = {};
-        let isConnected = false;
-        let isLoggedIn = false;
+    <!-- Sessions Page -->
+    <div id="sessions" class="page p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="sessions">جلسات</h1>
+            </div>
+        </div>
 
-        // Initialize the application
-        async function initApp() {
-            try {
-                // Load language data from Python API
-                const langData = await pywebview.api.get_language_data();
-                currentLanguage = langData.current;
-                languageData = langData.data;
+        <!-- Made sessions content responsive -->
+        <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+            <!-- Added session count selector -->
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm sm:text-base font-medium text-gray-800" data-lang="session_history">تاریخچه
+                    جلسات</h3>
+                <select onchange="loadSessions(this.value)"
+                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sharif-blue">
+                    <option value="3">3 جلسه اخیر</option>
+                    <option value="2">2 جلسه اخیر</option>
+                    <option value="1">1 جلسه اخیر</option>
+                    <option value="0">هیچ جلسه‌ای</option>
+                </select>
+            </div>
+            <div class="space-y-3" id="sessions-list">
+                <!-- Sessions will be loaded here -->
+            </div>
+        </div>
+    </div>
 
-                // Update UI with current language
-                updateLanguage();
+    <!-- Logs Page -->
+    <div id="logs" class="page p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="logs">گزارش‌ها</h1>
+            </div>
+        </div>
 
-                // Check if user is logged in
-                const state = await pywebview.api.state();
-                isLoggedIn = state.logged_in;
-                isConnected = state.connected;
+        <!-- Made logs content responsive -->
+        <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+            <h3 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="application_logs">گزارش‌های
+                برنامه</h3>
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <div class="space-y-2 text-xs sm:text-sm font-mono" id="logs-list">
+                    <!-- Logs will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-                if (isLoggedIn) {
-                    showPage('dashboard');
-                    loadInitialData();
-                } else {
-                    showPage('login');
-                }
+    <!-- About Page -->
+    <div id="about" class="page p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
+            <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                <button onclick="toggleMenu()" class="hamburger-menu p-2">
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800 mb-1"></div>
+                    <div class="hamburger-line w-5 h-0.5 sm:w-6 sm:h-0.5 bg-gray-800"></div>
+                </button>
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800" data-lang="about">درباره ما</h1>
+            </div>
+        </div>
 
-            } catch (error) {
-                console.error('Failed to initialize app:', error);
-                currentLanguage = 'fa';
+        <!-- Made about content responsive -->
+        <div class="max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center mb-4 sm:mb-6">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-sharif-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2" data-lang="about_title">درباره شریف
+                    کانکت</h3>
+                <p class="text-xs sm:text-sm text-gray-500" data-lang="about_desc">شریف کانکت یک سرویس VPN امن و سریع
+                    است که توسط دانشگاه صنعتی شریف توسعه یافته است.</p>
+            </div>
+
+            <!-- Updated about content with info from API -->
+            <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+                <div class="space-y-3" id="app-info">
+                    <!-- App info will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.addEventListener('pywebviewready', function () {
+    pywebview.api.config_data().then(function (config) {
+        document.getElementById("username").value = config.username;
+        document.getElementById("password").value = config.password;
+    });
+});
+</script>
+<script>
+    let currentLanguage = 'fa';
+    let languageData = {};
+    let isConnected = false;
+    let isLoggedIn = false;
+
+    // Initialize the application
+    async function initApp() {
+        try {
+            // Load language data from Python API
+            const langData = await pywebview.api.get_language_data();
+            currentLanguage = langData.current;
+            languageData = langData.data;
+
+            // Update UI with current language
+            updateLanguage();
+            // Check if user is logged in
+            const state = await pywebview.api.state();
+            isLoggedIn = state.logged_in;
+            isConnected = state.connected;
+
+
+            if (isLoggedIn) {
+                showPage('dashboard');
+                loadInitialData();
+            } else {
                 showPage('login');
             }
+
+        } catch (error) {
+            console.error('Failed to initialize app:', error);
+            currentLanguage = 'fa';
+            showPage('login');
         }
+    }
 
-        async function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const remember_me = true
-            const errorDiv = document.getElementById('login-error');
+    async function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const remember_me = true
+        const errorDiv = document.getElementById('login-error');
 
-            try {
-                const result = await pywebview.api.login(username, password,remember_me);
-                if (result.success) {
-                    isLoggedIn = true;
-                    showPage('dashboard');
-                    loadInitialData();
-                    errorDiv.classList.add('hidden');
-                } else {
-                    errorDiv.textContent = result.message;
-                    errorDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error('Login failed:', error);
-                errorDiv.textContent = 'خطا در ورود به سیستم';
+        try {
+            const result = await pywebview.api.login(username, password, remember_me);
+            if (result.success) {
+                isLoggedIn = true;
+                showPage('dashboard');
+                loadInitialData();
+                errorDiv.classList.add('hidden');
+            } else {
+                errorDiv.textContent = result.message;
                 errorDiv.classList.remove('hidden');
             }
+        } catch (error) {
+            console.error('Login failed:', error);
+            errorDiv.textContent = 'خطا در ورود به سیستم';
+            errorDiv.classList.remove('hidden');
         }
+    }
 
-        async function handleChangeCredentials(event) {
-            event.preventDefault();
-            const currentPassword = document.getElementById('current-password').value;
-            const newUsername = document.getElementById('new-username').value;
-            const newPassword = document.getElementById('new-password').value;
-            const resultDiv = document.getElementById('change-result');
+    async function handleChangeCredentials(event) {
+        event.preventDefault();
+        const currentPassword = document.getElementById('current-password').value;
+        const newUsername = document.getElementById('new-username').value;
+        const newPassword = document.getElementById('new-password').value;
+        const resultDiv = document.getElementById('change-result');
 
-            try {
-                const result = await pywebview.api.change(newUsername, newPassword, currentPassword);
-                if (result.success) {
-                    resultDiv.textContent = result.message;
-                    resultDiv.className = 'mt-2 text-sm text-center text-green-600';
-                    resultDiv.classList.remove('hidden');
-                    // Clear form
-                    event.target.reset();
-                } else {
-                    resultDiv.textContent = result.message;
-                    resultDiv.className = 'mt-2 text-sm text-center text-red-600';
-                    resultDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error('Change credentials failed:', error);
-                resultDiv.textContent = 'خطا در تغییر اطلاعات';
+        try {
+            const result = await pywebview.api.change(newUsername, newPassword, currentPassword);
+            if (result.success) {
+                resultDiv.textContent = result.message;
+                resultDiv.className = 'mt-2 text-sm text-center text-green-600';
+                resultDiv.classList.remove('hidden');
+                // Clear form
+                event.target.reset();
+            } else {
+                resultDiv.textContent = result.message;
                 resultDiv.className = 'mt-2 text-sm text-center text-red-600';
                 resultDiv.classList.remove('hidden');
             }
+        } catch (error) {
+            console.error('Change credentials failed:', error);
+            resultDiv.textContent = 'خطا در تغییر اطلاعات';
+            resultDiv.className = 'mt-2 text-sm text-center text-red-600';
+            resultDiv.classList.remove('hidden');
         }
+    }
 
-        async function loadInitialData() {
-            loadSessions(3);
-            loadLogs();
-            loadProfile();
-            loadAppInfo();
-            updateConnectionStatus();
+    async function loadInitialData() {
+        loadSessions(3);
+        loadLogs();
+        loadProfile();
+        loadAppInfo();
+        updateConnectionStatus();
+    }
+
+    // Language switching
+    async function switchLanguage(langCode) {
+        try {
+            await pywebview.api.switch_language(langCode);
+            const langData = await pywebview.api.get_language_data();
+            currentLanguage = langData.current;
+            languageData = langData.data;
+
+            updateLanguage();
+            updateLanguageButtons();
+            await loadProfile();
+
+        } catch (error) {
+            console.error('Failed to switch language:', error);
         }
+    }
 
-        // Language switching
-        async function switchLanguage(langCode) {
-            try {
-                await pywebview.api.switch_language(langCode);
-                const langData = await pywebview.api.get_language_data();
-                currentLanguage = langData.current;
-                languageData = langData.data;
-
-                updateLanguage();
-                updateLanguageButtons();
-
-            } catch (error) {
-                console.error('Failed to switch language:', error);
+    function updateLanguage() {
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            if (languageData[key]) {
+                element.textContent = languageData[key];
             }
+        });
+
+        const isRTL = currentLanguage === 'fa';
+        document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+        document.body.className = document.body.className.replace(/\b(rtl|ltr)\b/g, '');
+        document.body.classList.add(isRTL ? 'rtl' : 'ltr');
+    }
+
+    function updateLanguageButtons() {
+        // Update main language buttons
+        const faBtn = document.getElementById('lang-fa');
+        const enBtn = document.getElementById('lang-en');
+        if (faBtn && enBtn) {
+            faBtn.className = currentLanguage === 'fa'
+                ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
+                : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
+
+            enBtn.className = currentLanguage === 'en'
+                ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
+                : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
         }
 
-        function updateLanguage() {
-            document.querySelectorAll('[data-lang]').forEach(element => {
-                const key = element.getAttribute('data-lang');
-                if (languageData[key]) {
-                    element.textContent = languageData[key];
-                }
-            });
+        // Update login page language buttons
+        const loginFaBtn = document.getElementById('login-lang-fa');
+        const loginEnBtn = document.getElementById('login-lang-en');
+        if (loginFaBtn && loginEnBtn) {
+            loginFaBtn.className = currentLanguage === 'fa'
+                ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
+                : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
 
-            const isRTL = currentLanguage === 'fa';
-            document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-            document.body.className = document.body.className.replace(/\b(rtl|ltr)\b/g, '');
-            document.body.classList.add(isRTL ? 'rtl' : 'ltr');
+            loginEnBtn.className = currentLanguage === 'en'
+                ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
+                : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
+        }
+    }
+
+    function toggleMenu() {
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const hamburgerMenus = document.querySelectorAll('.hamburger-menu');
+
+        menuOverlay.classList.toggle('active');
+        hamburgerMenus.forEach(menu => menu.classList.toggle('active'));
+    }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+
+        document.getElementById(pageId).classList.add('active');
+        if (pageId !== 'login') {
+            toggleMenu();
+        }
+    }
+
+    async function toggleConnection(element) {
+        if (!isLoggedIn) {
+            alert('لطفا ابتدا وارد شوید');
+            return;
         }
 
-        function updateLanguageButtons() {
-            // Update main language buttons
-            const faBtn = document.getElementById('lang-fa');
-            const enBtn = document.getElementById('lang-en');
-            if (faBtn && enBtn) {
-                faBtn.className = currentLanguage === 'fa'
-                    ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
-                    : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
-
-                enBtn.className = currentLanguage === 'en'
-                    ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
-                    : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
+        try {
+            let result;
+            if (isConnected) {
+                result = await pywebview.api.disconnect();
+            } else {
+                result = await pywebview.api.connect();
             }
 
-            // Update login page language buttons
-            const loginFaBtn = document.getElementById('login-lang-fa');
-            const loginEnBtn = document.getElementById('login-lang-en');
-            if (loginFaBtn && loginEnBtn) {
-                loginFaBtn.className = currentLanguage === 'fa'
-                    ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
-                    : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
-
-                loginEnBtn.className = currentLanguage === 'en'
-                    ? 'px-3 py-1 text-sm rounded-md bg-sharif-blue text-white'
-                    : 'px-3 py-1 text-sm rounded-md bg-gray-200 text-gray-700';
+            if (result.success) {
+                isConnected = result.status === 'connected';
+                updateConnectionUI();
+                console.log(result.message);
+            } else {
+                alert(result.message);
             }
+
+        } catch (error) {
+            console.error('Connection toggle failed:', error);
+        }
+    }
+
+    function updateConnectionUI() {
+        const toggle = document.getElementById('main-toggle');
+        const statusIndicator = document.getElementById('status-indicator');
+        const connectionText = document.getElementById('connection-text');
+        const protectionCircle = document.getElementById('protection-circle');
+        const currentIp = document.getElementById('current-ip');
+
+        if (isConnected) {
+            toggle.classList.add('active');
+            toggle.style.backgroundColor = '#10B981';
+            toggle.querySelector('div').style.transform = 'translateX(0)';
+
+            statusIndicator.className = 'w-2 h-2 bg-sharif-green rounded-full';
+            connectionText.textContent = languageData.connected || 'متصل';
+            protectionCircle.className = 'w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-sharif-green rounded-full flex items-center justify-center bg-white shadow-lg';
+            currentIp.textContent = (languageData.your_ip || 'آی‌پی شما') + ': 185.143.234.123';
+        } else {
+            toggle.classList.remove('active');
+            toggle.style.backgroundColor = '#D1D5DB';
+            toggle.querySelector('div').style.transform = 'translateX(-24px)';
+
+            statusIndicator.className = 'w-2 h-2 bg-red-500 rounded-full';
+            connectionText.textContent = languageData.disconnected || 'قطع شده';
+            protectionCircle.className = 'w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-gray-300 rounded-full flex items-center justify-center bg-white shadow-lg';
+            currentIp.textContent = (languageData.your_ip || 'آی‌پی شما') + ': ---.---.---.---';
+        }
+    }
+
+    async function updateConnectionStatus() {
+        try {
+            const state = await pywebview.api.state();
+            isConnected = state.connected;
+            isLoggedIn = state.logged_in;
+            updateConnectionUI();
+        } catch (error) {
+            console.error('Failed to get connection status:', error);
+        }
+    }
+
+    async function toggleSetting(element, settingName) {
+        element.classList.toggle('active');
+        const slider = element.querySelector('div');
+        const isActive = element.classList.contains('active');
+
+        if (isActive) {
+            element.style.backgroundColor = '#10B981';
+            slider.style.transform = 'translateX(0)';
+        } else {
+            element.style.backgroundColor = '#D1D5DB';
+            slider.style.transform = 'translateX(-20px)';
         }
 
-        function toggleMenu() {
-            const menuOverlay = document.querySelector('.menu-overlay');
-            const hamburgerMenus = document.querySelectorAll('.hamburger-menu');
-
-            menuOverlay.classList.toggle('active');
-            hamburgerMenus.forEach(menu => menu.classList.toggle('active'));
+        // Save setting to API
+        try {
+            const settings = {};
+            settings[settingName] = isActive;
+            await pywebview.api.update_settings(settings);
+        } catch (error) {
+            console.error('Failed to update setting:', error);
         }
+    }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+    async function loadSessions(count = 3) {
+        try {
+            const sessions = await pywebview.api.sessions(parseInt(count));
+            const sessionsList = document.getElementById('sessions-list');
 
-            document.getElementById(pageId).classList.add('active');
-            if (pageId !== 'login') {
-                toggleMenu();
-            }
-        }
-
-        async function toggleConnection(element) {
-            if (!isLoggedIn) {
-                alert('لطفا ابتدا وارد شوید');
+            if (sessions.length === 0) {
+                sessionsList.innerHTML = '<div class="bg-white rounded-xl p-4 shadow-sm text-center text-gray-500">هیچ جلسه‌ای یافت نشد</div>';
                 return;
             }
 
-            try {
-                let result;
-                if (isConnected) {
-                    result = await pywebview.api.disconnect();
-                } else {
-                    result = await pywebview.api.connect();
-                }
-
-                if (result.success) {
-                    isConnected = result.status === 'connected';
-                    updateConnectionUI();
-                    console.log(result.message);
-                } else {
-                    alert(result.message);
-                }
-
-            } catch (error) {
-                console.error('Connection toggle failed:', error);
-            }
-        }
-
-        function updateConnectionUI() {
-            const toggle = document.getElementById('main-toggle');
-            const statusIndicator = document.getElementById('status-indicator');
-            const connectionText = document.getElementById('connection-text');
-            const protectionCircle = document.getElementById('protection-circle');
-            const currentIp = document.getElementById('current-ip');
-
-            if (isConnected) {
-                toggle.classList.add('active');
-                toggle.style.backgroundColor = '#10B981';
-                toggle.querySelector('div').style.transform = 'translateX(0)';
-
-                statusIndicator.className = 'w-2 h-2 bg-sharif-green rounded-full';
-                connectionText.textContent = languageData.connected || 'متصل';
-                protectionCircle.className = 'w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-sharif-green rounded-full flex items-center justify-center bg-white shadow-lg';
-                currentIp.textContent = (languageData.your_ip || 'آی‌پی شما') + ': 185.143.234.123';
-            } else {
-                toggle.classList.remove('active');
-                toggle.style.backgroundColor = '#D1D5DB';
-                toggle.querySelector('div').style.transform = 'translateX(-24px)';
-
-                statusIndicator.className = 'w-2 h-2 bg-red-500 rounded-full';
-                connectionText.textContent = languageData.disconnected || 'قطع شده';
-                protectionCircle.className = 'w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 border-4 border-gray-300 rounded-full flex items-center justify-center bg-white shadow-lg';
-                currentIp.textContent = (languageData.your_ip || 'آی‌پی شما') + ': ---.---.---.---';
-            }
-        }
-
-        async function updateConnectionStatus() {
-            try {
-                const state = await pywebview.api.state();
-                isConnected = state.connected;
-                isLoggedIn = state.logged_in;
-                updateConnectionUI();
-            } catch (error) {
-                console.error('Failed to get connection status:', error);
-            }
-        }
-
-        async function toggleSetting(element, settingName) {
-            element.classList.toggle('active');
-            const slider = element.querySelector('div');
-            const isActive = element.classList.contains('active');
-
-            if (isActive) {
-                element.style.backgroundColor = '#10B981';
-                slider.style.transform = 'translateX(0)';
-            } else {
-                element.style.backgroundColor = '#D1D5DB';
-                slider.style.transform = 'translateX(-20px)';
-            }
-
-            // Save setting to API
-            try {
-                const settings = {};
-                settings[settingName] = isActive;
-                await pywebview.api.update_settings(settings);
-            } catch (error) {
-                console.error('Failed to update setting:', error);
-            }
-        }
-
-        async function loadSessions(count = 3) {
-            try {
-                const sessions = await pywebview.api.sessions(parseInt(count));
-                const sessionsList = document.getElementById('sessions-list');
-
-                if (sessions.length === 0) {
-                    sessionsList.innerHTML = '<div class="bg-white rounded-xl p-4 shadow-sm text-center text-gray-500">هیچ جلسه‌ای یافت نشد</div>';
-                    return;
-                }
-
-                sessionsList.innerHTML = sessions.map(session => `
+            sessionsList.innerHTML = sessions.map(session => `
                     <div class="bg-white rounded-xl p-4 shadow-sm">
                         <div class="flex justify-between items-center mb-2">
                             <div>
@@ -781,37 +877,42 @@
                         </div>
                     </div>
                 `).join('');
-            } catch (error) {
-                console.error('Failed to load sessions:', error);
-            }
+        } catch (error) {
+            console.error('Failed to load sessions:', error);
         }
+    }
 
-        async function loadLogs() {
-            try {
-                const logs = await pywebview.api.get_logs();
-                const logsList = document.getElementById('logs-list');
+    async function loadLogs() {
+        try {
+            const logs = await pywebview.api.get_logs();
+            const logsList = document.getElementById('logs-list');
 
-                logsList.innerHTML = logs.map(log => {
-                    const typeClass = log.type === 'success' ? 'text-green-600' :
-                                     log.type === 'error' ? 'text-red-600' : 'text-gray-800';
-                    return `
+            logsList.innerHTML = logs.map(log => {
+                const typeClass = log.type === 'success' ? 'text-green-600' :
+                    log.type === 'error' ? 'text-red-600' : 'text-gray-800';
+                return `
                         <div class="flex justify-between items-center py-1">
                             <span class="text-gray-500">${log.time}</span>
                             <span class="${typeClass}">${log.message}</span>
                         </div>
                     `;
-                }).join('');
-            } catch (error) {
-                console.error('Failed to load logs:', error);
-            }
+            }).join('');
+        } catch (error) {
+            console.error('Failed to load logs:', error);
         }
+    }
 
-        async function loadProfile() {
-            try {
-                const profile = await pywebview.api.profile();
-                const profileDetails = document.getElementById('profile-details');
+    async function loadProfile() {
+        try {
+            const profile = await pywebview.api.profile();
+            const profileDetails = document.getElementById('profile-details');
+            let name = profile.fullname;
+            if (currentLanguage === "en") {
+                name = profile.fullname_en
+            }
+            document.getElementById('profile-name').innerText = name
 
-                profileDetails.innerHTML = `
+            profileDetails.innerHTML = `
                     <h4 class="text-sm sm:text-base font-medium text-gray-800 mb-4" data-lang="subscription_details">جزئیات اشتراک</h4>
                     <div class="space-y-3">
                         <div class="flex justify-between">
@@ -819,34 +920,38 @@
                             <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.username}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="plan">طرح</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.plan}</span>
+                            <span class="text-xs sm:text-sm text-gray-600" data-lang="fullname">نام</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-800">${name}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="account_type">نوع حساب</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.account_type}</span>
+                            <span class="text-xs sm:text-sm text-gray-600" data-lang="gender">جنسیت</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.gender}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="expires">انقضا</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.expires}</span>
+                            <span class="text-xs sm:text-sm text-gray-600" data-lang="mobile">تلفن همراه</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.mobile}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-xs sm:text-sm text-gray-600" data-lang="data_usage">مصرف داده</span>
-                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.data_used} / ${profile.data_limit}</span>
+                            <span class="text-xs sm:text-sm text-gray-600" data-lang="param">گروه کاربری</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.param}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-600" data-lang="account_status">وضعیت اکانت</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-800">${profile.account_status}</span>
                         </div>
                     </div>
                 `;
-            } catch (error) {
-                console.error('Failed to load profile:', error);
-            }
+        } catch (error) {
+            console.error('Failed to load profile:', error);
         }
+    }
 
-        async function loadAppInfo() {
-            try {
-                const info = await pywebview.api.info();
-                const appInfo = document.getElementById('app-info');
+    async function loadAppInfo() {
+        try {
+            const info = await pywebview.api.info();
+            const appInfo = document.getElementById('app-info');
 
-                appInfo.innerHTML = `
+            appInfo.innerHTML = `
                     <div class="flex justify-between">
                         <span class="text-xs sm:text-sm text-gray-600" data-lang="version">نسخه</span>
                         <span class="text-xs sm:text-sm font-medium text-gray-800">${info.app_version}</span>
@@ -868,29 +973,29 @@
                         <span class="text-xs sm:text-sm font-medium text-gray-800">${info.total_users}</span>
                     </div>
                 `;
-            } catch (error) {
-                console.error('Failed to load app info:', error);
+        } catch (error) {
+            console.error('Failed to load app info:', error);
+        }
+    }
+
+    // Initialize app when page loads
+    document.addEventListener('DOMContentLoaded', initApp);
+
+    // Simulate data updates
+    setInterval(() => {
+        if (isConnected) {
+            const todayData = document.getElementById('today-data');
+            const weekData = document.getElementById('week-data');
+
+            if (todayData && weekData) {
+                const currentMB = parseInt(todayData.textContent) || 0;
+                const currentGB = parseFloat(weekData.textContent) || 0;
+
+                todayData.textContent = (currentMB + Math.floor(Math.random() * 10)) + ' MB';
+                weekData.textContent = (currentGB + Math.random() * 0.1).toFixed(1) + ' GB';
             }
         }
-
-        // Initialize app when page loads
-        document.addEventListener('DOMContentLoaded', initApp);
-
-        // Simulate data updates
-        setInterval(() => {
-            if (isConnected) {
-                const todayData = document.getElementById('today-data');
-                const weekData = document.getElementById('week-data');
-
-                if (todayData && weekData) {
-                    const currentMB = parseInt(todayData.textContent) || 0;
-                    const currentGB = parseFloat(weekData.textContent) || 0;
-
-                    todayData.textContent = (currentMB + Math.floor(Math.random() * 10)) + ' MB';
-                    weekData.textContent = (currentGB + Math.random() * 0.1).toFixed(1) + ' GB';
-                }
-            }
-        }, 5000);
-    </script>
+    }, 5000);
+</script>
 </body>
 </html>

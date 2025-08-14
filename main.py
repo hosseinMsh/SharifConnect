@@ -5,6 +5,8 @@ import time
 
 from utils.configurations import load_config, save_config
 from utils.connection.network import check_sharif_network
+from utils.connection.vpn import connect_vpn
+from utils.metadata.profile import get_data
 
 config = load_config()
 
@@ -50,6 +52,12 @@ class SharifConnectAPI:
             return True
         return False
 
+    def config_data(self):
+        """Load configuration file"""
+        if self.remember_me:
+            return config
+        return {}
+
     def login(self, username, password, remember_me):
         """Login to Sharif Connect"""
         # Simulate login validation
@@ -68,6 +76,7 @@ class SharifConnectAPI:
             'success': False,
             'message': 'Invalid credentials'
         }
+
     def logout(self):
         """Logout from Sharif Connect"""
         self.logged_in = False
@@ -77,15 +86,17 @@ class SharifConnectAPI:
         """Get user profile information"""
         if not self.logged_in:
             return {'error': 'Not logged in'}
-
+        status, data = get_data(self.username, self.password)
+        if status is False:
+            return {'error': 'Username or password incorrect'}
         return {
             'username': self.username,
-            'group_name': 'Premium',
-            'group_speed': '2024-12-31',
-            'group_volume': '45.2 GB',
-            'charge_date': '100 GB',
-            'volume_remaining': 'Student',
-            'volume_used': '2024-01-01'
+            'fullname': data['fullname'] if data['fullname'] else "نامشخص",
+            'fullname_en': data['fullname_en'] if data['fullname_en'] else "Not defined",
+            'gender': data['gender'] if data['gender'] else "نامشخص",
+            'mobile': data['mobile'] if data['mobile'] else "نامشخص",
+            'account_status': data['account_status'],
+            'param': data['param'] if data['param'] else "نامشخص",
         }
 
     def info(self):
@@ -94,9 +105,9 @@ class SharifConnectAPI:
             'app_version': '1.0.0',
             'build_date': '2024-01-15',
             'platform': 'Windows',
-            'python_version': '3.9+',
+            'python_version': '3.12+',
             'server_status': 'Online',
-            'total_users': '1,234',
+            'total_users': '18,000',
             'server_load': '45%'
         }
 
@@ -139,20 +150,62 @@ class SharifConnectAPI:
         count = max(0, min(3, count))
         return all_sessions[:count]
 
+    def update_state(self):
+        """Get current connection state"""
+        self.state = check_sharif_network()  # return 0, 1, 2, 3
+        return self.state
+
     def connect(self):
         """Connect to VPN"""
         if not self.logged_in:
             return {'success': False, 'message': 'Please login again'}
-
-        self.connected = True
-        return {
-            'success': True,
-            'status': 'connected',
-            'message': 'Successfully connected to Sharif Connect',
-            'server': 'Tehran Server 1',
-            'ip': '185.143.234.123',
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
-        }
+        self.update_state()
+        if self.state == 2:
+            self.connected = True
+            # todo: get data
+            return {
+                'success': True,
+                'status': 'connected',
+                'message': 'Successfully connected to Sharif Connect',
+                'server': 'Tehran Server 1',
+                'ip': '185.143.234.123',
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+            }
+        elif self.state == 3:
+            # Todo
+            self.connected = True
+        # 0,1 is outside of sharif
+        elif self.state == 0:
+            res, data = connect_vpn(self.username, self.password)
+            if res is False:
+                self.connected = False
+                return {
+                    'success': True,
+                    'status': 'connected',
+                    'message': 'Successfully connected to Sharif Connect',
+                    'server': 'Tehran Server 1',
+                    'ip': '185.143.234.123',
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+                }
+            self.connected = True
+            return {
+                'success': True,
+                'status': 'connected',
+                'message': 'Successfully connected to Sharif Connect',
+                'server': 'Tehran Server 1',
+                'ip': '185.143.234.123',
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+            }
+        elif self.state == 1:
+            self.connected = True
+            return {
+                'success': True,
+                'status': 'connected',
+                'message': 'Successfully connected to Sharif Connect',
+                'server': 'Tehran Server 1',
+                'ip': '185.143.234.123',
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+            }
 
     def disconnect(self):
         """Disconnect from VPN"""
@@ -163,11 +216,6 @@ class SharifConnectAPI:
             'message': 'Disconnected from Sharif Connect',
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
         }
-
-    def state(self):
-        """Get current connection state"""
-        self.state = check_sharif_network()  # return 0, 1, 2, 3
-        return self.state
 
     def change(self, new_username=None, new_password=None, current_password=None):
         """Change username or password"""
@@ -239,7 +287,7 @@ def create_window():
     api = SharifConnectAPI()
 
     # Create webview window
-    window = webview.create_window(
+    webview.create_window(
         'Sharif Connect',
         str(html_file),
         width=700,
