@@ -29,7 +29,7 @@ class SharifConnectAPI:
     def load_languages(self):
         """Load language files"""
         try:
-            with open('assets/lang/languages.json', 'r', encoding='utf-8') as f:
+            with open('../static/lang/languages.json', 'r', encoding='utf-8') as f:
                 self.languages = json.load(f)
         except FileNotFoundError:
             # Fallback if language file doesn't exist
