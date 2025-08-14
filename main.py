@@ -3,10 +3,10 @@ import json
 from pathlib import Path
 import time
 
-from utils.configurations import load_config, save_config
-from utils.connection.network import check_sharif_network
-from utils.connection.vpn import connect_vpn
-from utils.metadata.profile import get_data
+from api.configurations import load_config, save_config
+from api.connection.network import check_sharif_network
+from api.connection.vpn import connect_vpn
+from api.metadata.profile import get_data
 
 config = load_config()
 
@@ -278,26 +278,3 @@ class SharifConnectAPI:
         }
 
 
-def create_window():
-    # Get absolute path to HTML file
-    current_dir = Path(__file__).parent
-    html_file = current_dir / 'index.html'
-
-    # Create API instance
-    api = SharifConnectAPI()
-
-    # Create webview window
-    webview.create_window(
-        'Sharif Connect',
-        str(html_file),
-        width=700,
-        height=800,
-        resizable=True,
-        js_api=api
-    )
-
-    webview.start(debug=False)
-
-
-if __name__ == '__main__':
-    create_window()
