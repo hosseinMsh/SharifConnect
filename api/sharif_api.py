@@ -1,6 +1,4 @@
-import webview
 import json
-from pathlib import Path
 import time
 
 from api.configurations import load_config, save_config
