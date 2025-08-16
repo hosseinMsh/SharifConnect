@@ -2,9 +2,11 @@ import json
 import time
 
 from api.configurations import load_config, save_config
-from api.connection.inside import connect_via_requests, disconnect_current_session
+from api.connection.inside import connect_via_requests, disconnect_current_session, disconnect_session, \
+    get_online_sessions
 from api.connection.network import check_sharif_network, get_ip_address
 from api.connection.vpn import connect_vpn, disconnect_vpn
+from api.metadata.connections_logs import get_bandwidth_logs
 from api.metadata.profile import get_data
 
 config = load_config()
@@ -110,44 +112,11 @@ class SharifConnectAPI:
             'server_load': '45%'
         }
 
-    def sessions(self, count=3):
+    def sessions(self):
         """Get session history (0 to 3 sessions)"""
-        all_sessions = [
-            {
-                'id': 1,
-                'date': '2024-01-15',
-                'start_time': '14:30:00',
-                'end_time': '17:04:00',
-                'duration': '2h 34m',
-                'data_used': '1.2 GB',
-                'server': 'Tehran Server 1',
-                'status': 'Completed'
-            },
-            {
-                'id': 2,
-                'date': '2024-01-14',
-                'start_time': '10:15:00',
-                'end_time': '12:00:00',
-                'duration': '1h 45m',
-                'data_used': '890 MB',
-                'server': 'Tehran Server 2',
-                'status': 'Completed'
-            },
-            {
-                'id': 3,
-                'date': '2024-01-13',
-                'start_time': '16:20:00',
-                'end_time': '19:32:00',
-                'duration': '3h 12m',
-                'data_used': '2.1 GB',
-                'server': 'Tehran Server 1',
-                'status': 'Completed'
-            }
-        ]
-
-        # Return 0 to 3 sessions based on count parameter
-        count = max(0, min(3, count))
-        return all_sessions[:count]
+        result, message, session  = get_online_sessions(self.username,self.password)
+        print(message)
+        return {'result': result, 'data' : message}
 
     def update_state(self):
         """Get current connection state"""
@@ -199,7 +168,19 @@ def disconnect(self):
             'message': 'Disconnected from Sharif Connect',
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
         }
-    return {'success' : False, 'massage': 'Disconnect is not successful'}
+    return {'success': False, 'massage': 'Disconnect is not successful'}
+
+
+def disconnect_one_sessions(self, ras_ip, session_ip, session_id):
+    a, b, session = get_online_sessions(self.username, self.password)
+    if a is True:
+        success, msg = disconnect_session(session, ras_ip, session_ip, session_id)
+        if success is True:
+            return {'success': True, 'messages': f'Disconnected IP: {session_ip}'}
+        else:
+            return {'success': False, 'messages': 'Disconnect is not successful'}
+    else:
+        return {'success': False, 'messages': 'Cant load sessions'}
 
 
 def change(self, new_username=None, new_password=None, current_password=None):
@@ -220,7 +201,8 @@ def change(self, new_username=None, new_password=None, current_password=None):
     if new_password:
         self.password = new_password
         changes_made.append('password')
-    save_config({"username": self.username, "password": self.password, "remember": True })# Todo : add remember me in front
+    save_config(
+        {"username": self.username, "password": self.password, "remember": True})  # Todo : add remember me in front
     if changes_made:
         return {
             'success': True,
@@ -233,13 +215,13 @@ def change(self, new_username=None, new_password=None, current_password=None):
 
 def get_logs(self):
     """Get application logs"""
-    return [
-        {'time': '14:32:15', 'type': 'info', 'message': 'Connected to Tehran Server 1'},
-        {'time': '14:31:45', 'type': 'success', 'message': 'Authentication successful'},
-        {'time': '14:31:30', 'type': 'info', 'message': 'Connecting to server...'},
-        {'time': '14:30:00', 'type': 'info', 'message': 'Login attempt from user'},
-        {'time': '14:29:45', 'type': 'info', 'message': 'Application started'},
-    ]
+    success, data = get_bandwidth_logs(self.usename, self.password)
+    if success is False:
+        return {'success': False, 'message': 'Cant get logs'}
+    return {
+        'success': True,
+        'data': data
+    }
 
 
 def get_settings(self):
