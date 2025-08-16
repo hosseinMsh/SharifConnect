@@ -18,4 +18,3 @@
 ```bash
 pyinstaller --noconfirm  --onefile --clean --name "Sharif Connect" main.py --hidden-import=qasync  --noconsole --windowed  --add-data "static;static"  --add-data ".env;."   --icon=static/images/SharifConnect.ico
 ```
-pyinstaller --noconfirm --onefile --clean --name "Sharif Connect" main.py --hidden-import=qasync --noconsole --windowed --add-data "static;static" --add-data ".env;." --icon=static/images/SharifConnect.ico
