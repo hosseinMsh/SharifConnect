@@ -98,6 +98,7 @@ class SharifConnectApp {
       return
     }
 
+
     try {
       if (this.isConnected) {
         const result = await window.pywebview.api.disconnect()
