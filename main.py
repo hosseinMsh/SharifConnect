@@ -30,4 +30,4 @@ if __name__ == '__main__':
         js_api=sharif_api  # Use your existing API
     )
     
-    webview.start(debug=True)
+    webview.start(debug=False)
