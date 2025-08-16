@@ -207,14 +207,6 @@ export class NavigationManager {
         const sessionsList = document.getElementById("sessions-list")
         if (!sessionsList) return
 
-        function disconnect_sessions(ras_ip, station_ip, session_id)
-        {
-            const result = window.pywebview.api.disconnect_one_sessions(ras_ip, station_ip, session_id)
-            if (result.success) {
-                this.updateConnectionUI(false)
-            }
-        }
-
         // اگر نتیجه نداشت
         if (response.result === false) {
             sessionsList.innerHTML = '<p class="text-center text-gray-500 py-8">هیچ جلسه‌ای یافت نشد</p>'
@@ -264,7 +256,7 @@ export class NavigationManager {
 
           <div class="mt-3 text-right">
             <button 
-              onclick="window.navigationManager.disconnect_sessions('${session.ras_ip}', '${session.session_ip}', '${session.session_id}')"
+              onclick="window.pywebview.api.disconnect_one_sessions('${session.ras_ip}', '${session.session_ip}', '${session.session_id}')"
               class="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200">
               Disconnect
             </button>
@@ -273,7 +265,9 @@ export class NavigationManager {
       `
             })
             .join("")
+
     }
+
 
 
     updateLogsDisplay(logs) {
