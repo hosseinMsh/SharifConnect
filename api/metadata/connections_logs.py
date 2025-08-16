@@ -22,4 +22,3 @@ def get_logs(username ,password):
 
 
 
-get_logs("e_tallan","777")
