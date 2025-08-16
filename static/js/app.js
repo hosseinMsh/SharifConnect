@@ -42,7 +42,6 @@ class SharifConnectApp {
     }
 
     async loadInitialConfig() {
-        debugger;
         try {
             const config = await window.pywebview.api.config_data()
             if (config.username && config.password) {
