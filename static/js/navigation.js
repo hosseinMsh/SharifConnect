@@ -132,7 +132,9 @@ export class NavigationManager {
         if (typeof window.pywebview !== "undefined") {
             try {
                 const logs = await window.pywebview.api.get_logs()
-                this.updateLogsDisplay(logs)
+                if (logs.success){
+                this.updateLogsDisplay(logs.data)
+                }
             } catch (error) {
                 console.error("Failed to load logs data:", error)
             }
@@ -271,23 +273,50 @@ export class NavigationManager {
 
 
     updateLogsDisplay(logs) {
-        const logsList = document.getElementById("logs-list")
-        if (!logsList) return
+    const logsList = document.getElementById("logs-list")
+    if (!logsList) return
 
-        logsList.innerHTML = logs
-            .map(
-                (log) => `
-            <div class="flex items-center space-x-2 space-x-reverse">
-                <span class="text-gray-500">${log.time}</span>
-                <span class="w-2 h-2 rounded-full ${
-                    log.type === "success" ? "bg-green-500" : log.type === "error" ? "bg-red-500" : "bg-blue-500"
-                }"></span>
-                <span class="flex-1">${log.message}</span>
+    if (!logs || logs.length === 0) {
+        logsList.innerHTML = `
+            <div class="text-center text-gray-500 py-4">
+                هیچ لاگی موجود نیست
             </div>
-        `,
-            )
-            .join("")
+        `
+        return
     }
+
+    logsList.innerHTML = `
+        <div class="overflow-x-auto rounded-lg shadow-md">
+            <table class="min-w-full border border-gray-200 text-sm text-gray-700">
+                <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                        <th class="px-4 py-2 border">#</th>
+                        <th class="px-4 py-2 border">زمان ورود</th>
+                        <th class="px-4 py-2 border">زمان خروج</th>
+                        <th class="px-4 py-2 border">آپلود</th>
+                        <th class="px-4 py-2 border">دانلود</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${logs
+                        .map(
+                            (log) => `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-2 border text-center">${log.index}</td>
+                            <td class="px-4 py-2 border text-center">${log.login_time}</td>
+                            <td class="px-4 py-2 border text-center">${log.logout_time}</td>
+                            <td class="px-4 py-2 border text-green-600 font-medium">${log.upload}</td>
+                            <td class="px-4 py-2 border text-blue-600 font-medium">${log.download}</td>
+                        </tr>
+                    `,
+                        )
+                        .join("")}
+                </tbody>
+            </table>
+        </div>
+    `
+}
+
 
     updateAboutDisplay(info) {
         const appInfo = document.getElementById("app-info")

@@ -216,7 +216,7 @@ class SharifConnectAPI:
 
     def get_logs(self):
         """Get application logs"""
-        success, data = get_bandwidth_logs(self.usename, self.password)
+        success, data = get_bandwidth_logs(self.username, self.password)
         if success is False:
             return {'success': False, 'message': 'Cant get logs'}
         return {
