@@ -114,9 +114,9 @@ class SharifConnectAPI:
 
     def sessions(self):
         """Get session history (0 to 3 sessions)"""
-        result, message, session  = get_online_sessions(self.username,self.password)
+        result, message, session = get_online_sessions(self.username, self.password)
         print(message)
-        return {'result': result, 'data' : message}
+        return {'result': result, 'data': message}
 
     def update_state(self):
         """Get current connection state"""
@@ -129,15 +129,17 @@ class SharifConnectAPI:
         if not self.logged_in:
             return {'success': False, 'message': 'Please login again'}
         self.update_state()
-
-        if self.state == 2 or 1:
+        if self.state == 2 or self.state == 1:
             res = True
         elif self.state == 3:
+
             res, data = connect_via_requests(self.username, self.password)
         # Connect with Vpn (outside)
         elif self.state == 0:
+
             res, data = connect_vpn(self.username, self.password)
         else:
+
             return {'success': False, 'message': 'Check the network can not get the SHARIF network'}
         return {
             'success': res,
@@ -148,12 +150,11 @@ class SharifConnectAPI:
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
         }
 
-
     def disconnect(self):
         """Disconnect from VPN"""
         success = False
         self.update_state()
-        if self.state == 0 or 3:
+        if self.state == 0 or self.state == 3:
             success, msg = True, ""
         elif self.state == 1:  # vpn is on
             success, msg = disconnect_vpn()
@@ -170,7 +171,6 @@ class SharifConnectAPI:
             }
         return {'success': False, 'massage': 'Disconnect is not successful'}
 
-
     def disconnect_one_sessions(self, ras_ip, session_ip, session_id):
         print(ras_ip, session_ip, session_id)
         a, b, session = get_online_sessions(self.username, self.password)
@@ -182,7 +182,6 @@ class SharifConnectAPI:
                 return {'success': False, 'messages': 'Disconnect is not successful'}
         else:
             return {'success': False, 'messages': 'Cant load sessions'}
-
 
     def change(self, new_username=None, new_password=None, current_password=None):
         """Change username or password"""
@@ -213,7 +212,6 @@ class SharifConnectAPI:
 
         return {'success': False, 'message': 'No changes specified'}
 
-
     def get_logs(self):
         """Get application logs"""
         success, data = get_bandwidth_logs(self.username, self.password)
@@ -223,7 +221,6 @@ class SharifConnectAPI:
             'success': True,
             'data': data
         }
-
 
     def get_settings(self):
         """Get current settings"""
@@ -236,7 +233,6 @@ class SharifConnectAPI:
             'language': self.current_language,
             'theme': 'auto'
         }
-
 
     def update_settings(self, settings):
         """Update application settings"""

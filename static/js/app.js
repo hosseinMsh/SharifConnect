@@ -111,6 +111,10 @@ class SharifConnectApp {
                     this.isConnected = false
                     this.updateConnectionUI(false)
                     Utils.showNotification("اتصال قطع شد", "info")
+                    const currentIpElement = document.getElementById("current-ip")
+                    if (currentIpElement ) {
+                        currentIpElement.textContent = `آی‌پی شما: ---,---,---,---`
+                    }
                 }
             } else {
                 const result = await window.pywebview.api.connect()
@@ -142,7 +146,7 @@ class SharifConnectApp {
             const toggleButton = toggleElement.querySelector("div")
             if (connected) {
                 toggleElement.classList.add("active")
-                if (toggleButton) toggleButton.style.transform = "translateX(-1.5rem)"
+                if (toggleButton) toggleButton.style.transform = "translateX(1.5rem)"
             } else {
                 toggleElement.classList.remove("active")
                 if (toggleButton) toggleButton.style.transform = "translateX(0)"
@@ -239,7 +243,7 @@ class SharifConnectApp {
             if (this.isLoggedIn) {
                 this.updateConnectionState()
             }
-        }, 10000)
+        }, 15000)
     }
 
     updateDataUsage() {
@@ -256,20 +260,28 @@ class SharifConnectApp {
     }
 
     async updateConnectionState() {
-        try {
-            if (typeof window.pywebview !== "undefined") {
-                const state = await window.pywebview.api.update_state()
-                this.connectionState = state
-                navigationManager.updateConnectionStatus(state)
+    try {
+        if (typeof window.pywebview !== "undefined") {
+            const state = await window.pywebview.api.update_state()
+            this.connectionState = state
+            navigationManager.updateConnectionStatus(state)
+
+            if (state === 1 || state === 2) {
+                this.updateConnectionUI(true)
+            } else {
+                this.updateConnectionUI(false)
             }
-        } catch (error) {
-            console.error("Failed to update connection state:", error)
         }
+    } catch (error) {
+        console.error("Failed to update connection state:", error)
     }
+}
+
 }
 
 // Global app instance
 const app = new SharifConnectApp()
+
 
 // Global functions for HTML event handlers
 window.handleLogin = (event) => {

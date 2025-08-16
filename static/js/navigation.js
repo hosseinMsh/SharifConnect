@@ -157,12 +157,14 @@ export class NavigationManager {
         const connectionText = document.getElementById("connection-text")
 
         if (statusIndicator && connectionText) {
-            if (state === 2 || state === 3) {
+            if (state === 1 || state === 2) {
                 statusIndicator.className = "w-2 h-2 bg-sharif-green rounded-full"
                 connectionText.textContent = "متصل"
+                window.app.updateConnectionUI(true)
             } else {
                 statusIndicator.className = "w-2 h-2 bg-red-500 rounded-full"
-                connectionText.textContent = "قطع شده"
+                connectionText.textContent = "قطع"
+                window.app.updateConnectionUI(false)
             }
         }
     }
