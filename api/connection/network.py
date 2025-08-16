@@ -1,6 +1,7 @@
 import subprocess
 import requests
 
+
 def ping(host):
     try:
         subprocess.check_output(
@@ -57,3 +58,12 @@ def check_sharif_network():
         else:
             return 0  # Outside no Sharif access
 
+def get_ip_address():
+    try:
+        response = requests.get("https://icanhazip.com/")
+        if response.status_code == 200:
+            return response.text
+        else:
+            return ""
+    except Exception as e:
+        return False
