@@ -23,7 +23,7 @@ def get_data(username, password):
     session.post(LOGIN_URL, data=data,allow_redirects=True)
     session.get(url=f"{LOGIN_URL}?service=https://register.sharif.edu/profile",allow_redirects=True)
     response =  session.get(USER_URL)
-    if response.status_code != requests.codes.ok:
+    if response.status_code != requests.codes.ok or "ورود" in response.text:
         return False, {}
     soup = BeautifulSoup(response.text, 'html.parser')
     return  True , {
