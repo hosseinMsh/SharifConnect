@@ -1,20 +1,72 @@
 # Sharif Connect
 
-## Introduction
+Sharif Connect is a secure desktop application designed for **Sharif University users** to simplify connecting to the intranet/VPN, monitor usage, and provide a user-friendly interface for managing connectivity.  
+It is built using **Python (PyWebView)** with a lightweight and modern UI inspired by VPN tools such as Hotspot Shield.
 
-## System Architecture
+---
+
+## 📖 Introduction
+The app provides:
+- A **login page** for entering Sharif credentials.
+- **One-click connect/disconnect** to the VPN or intranet.
+- A **dashboard** with real-time information (traffic usage, connection status, user info).
+- **Settings page** for advanced configuration.
+- **About page** with information about the app and ICTC of Sharif University.
+- Logs and profile management for debugging and user experience.
+
+---
+
+## 🏛 System Architecture
 [![](https://mermaid.ink/img/pako:eNqVVMtu2lAQ_ZWru0okoMQYaLxg0XTDJqpU0UXljQOXhxpsauymLUIqEQUWfED_gIeqOC6klE2_417Y9Us6Y_Owg6sUJLCxZ845c87YLVo0SowqtMne20wvspc1rWJqdVUn8GloplUr1hqabpFCk5lEa5LVhI-4y8fcjajJYwXcHcH9RaB0PSQnN-zqQ43dnB62vdCK75hewl7xlY9W38RAdP98GYo-H0Gn-I0HPoWrvcPmN68uPdIZd8UAymZ45Vlet0xNZ9Zh_euqZtbKl8zadI2QUvREn_ApKhed9XA1IXyOqkVH1X0IHD-eyxXyCoGhvmMlSMPZRA8xoN9HJheGrrPihrmQh6bNfNDpQN-dGADCjE-xG_xZOfwejwg3BbBfQAuS8P49v4OJXNQ2547o-5gbuPhejuvN0SW-lLDvYoAGzoDU5U4U5MF8q4no-h54jhKVohr-gBQqjZzrCAnhGXI5SEvxfbz1FsfzYccXESZciYfIpxgFDOUE-yCRgeiI2-18e8LdAoR0P4oGtcIXIMdoVWBNfLgdSPwfPsDpQnThd-lH6cBhDmB-DCeA9gAMHT4MrR1Hs_hPvsR9D4xz-lTyHj7EuX9qwoyB1DBpBXLCgYBm_oRUz4DgQ_8f-wJRLviSHLE2j-0_AIjamn2VC3X4MC2O25cIgGijx942_NjI7a3DMYH26JeeqtMYrZi1ElUs02YxWmdmXcO_tIVEKrWqrM5UqsBpiZU1-9pCq9rQBi-rt4ZR33aahl2pUqWsXTfhn90oadb2Xb0rAcXMvDBs3aLKuYdAlRb9SBVJTidkOXWWkdOp85R0JmVi9BNV5GwiKWVSElxOy8ms1I7Rzx5lMvE8m27_BUoMF74?type=png)](https://mermaid.live/edit#pako:eNqVVMtu2lAQ_ZWru0okoMQYaLxg0XTDJqpU0UXljQOXhxpsauymLUIqEQUWfED_gIeqOC6klE2_417Y9Us6Y_Owg6sUJLCxZ845c87YLVo0SowqtMne20wvspc1rWJqdVUn8GloplUr1hqabpFCk5lEa5LVhI-4y8fcjajJYwXcHcH9RaB0PSQnN-zqQ43dnB62vdCK75hewl7xlY9W38RAdP98GYo-H0Gn-I0HPoWrvcPmN68uPdIZd8UAymZ45Vlet0xNZ9Zh_euqZtbKl8zadI2QUvREn_ApKhed9XA1IXyOqkVH1X0IHD-eyxXyCoGhvmMlSMPZRA8xoN9HJheGrrPihrmQh6bNfNDpQN-dGADCjE-xG_xZOfwejwg3BbBfQAuS8P49v4OJXNQ2547o-5gbuPhejuvN0SW-lLDvYoAGzoDU5U4U5MF8q4no-h54jhKVohr-gBQqjZzrCAnhGXI5SEvxfbz1FsfzYccXESZciYfIpxgFDOUE-yCRgeiI2-18e8LdAoR0P4oGtcIXIMdoVWBNfLgdSPwfPsDpQnThd-lH6cBhDmB-DCeA9gAMHT4MrR1Hs_hPvsR9D4xz-lTyHj7EuX9qwoyB1DBpBXLCgYBm_oRUz4DgQ_8f-wJRLviSHLE2j-0_AIjamn2VC3X4MC2O25cIgGijx942_NjI7a3DMYH26JeeqtMYrZi1ElUs02YxWmdmXcO_tIVEKrWqrM5UqsBpiZU1-9pCq9rQBi-rt4ZR33aahl2pUqWsXTfhn90oadb2Xb0rAcXMvDBs3aLKuYdAlRb9SBVJTidkOXWWkdOp85R0JmVi9BNV5GwiKWVSElxOy8ms1I7Rzx5lMvE8m27_BUoMF74)
-## System Context Diagram
+
+---
+
+## 🌍 System Context Diagram
 [![](https://mermaid.ink/img/pako:eNpdkEFTgzAQhf9KZi9eClOgQMlBnWnHGS9e9KLGQ4SlzQgJE0K1Mvx3F1qmanLavO-93U0PuSkQOJSV-cz30jr2tBWa0dHBq4A7VVVYsI2yeYUC3pjnXTMdknKvW1UgeySPKkk5m0Ii2DO2JzAiULWsRXtAe_OPejAnaEVQ1yI7NPpCRCNxnHPi255V8h0rzgTkUl85lhutMXfMGabRCWDDb6c-ZyeU_Zf022liX9mp2bwrNSChQc5KL6dt57T4IlgKGUaH0LCAnVUFcGc7XECNtpZjCf1oE-D2WNN3jdMW0n4IEHogTyP1izH1bLOm2-2Bl7JqqeqaQjrcKrmz8oKgLtBuTKcd8HhKAN7DF3AvyvxkGazDIFil8TJbZyQf6T1YJn66TNMsSbIwyOIwGxbwPbUN_DAJ0ngVZVGcpjHd4Qfv65o3?type=png)](https://mermaid.live/edit#pako:eNpdkEFTgzAQhf9KZi9eClOgQMlBnWnHGS9e9KLGQ4SlzQgJE0K1Mvx3F1qmanLavO-93U0PuSkQOJSV-cz30jr2tBWa0dHBq4A7VVVYsI2yeYUC3pjnXTMdknKvW1UgeySPKkk5m0Ii2DO2JzAiULWsRXtAe_OPejAnaEVQ1yI7NPpCRCNxnHPi255V8h0rzgTkUl85lhutMXfMGabRCWDDb6c-ZyeU_Zf022liX9mp2bwrNSChQc5KL6dt57T4IlgKGUaH0LCAnVUFcGc7XECNtpZjCf1oE-D2WNN3jdMW0n4IEHogTyP1izH1bLOm2-2Bl7JqqeqaQjrcKrmz8oKgLtBuTKcd8HhKAN7DF3AvyvxkGazDIFil8TJbZyQf6T1YJn66TNMsSbIwyOIwGxbwPbUN_DAJ0ngVZVGcpjHd4Qfv65o3)
 
-## Function states 
+---
+
+## 🔄 Function States
 [![](https://mermaid.ink/img/pako:eNqNUs9vmzAU_lee3imRAAUCOHDYVq1Sk0s3abtsdQ8edohVsJExSzuU_72GrIRWmlZ84X36fjw_vx4LzQXm6Ps-VYVWe1nmVAHYg6hFDkbw7nGoK_akO5sDZ6URVI30faWPxYEZC9-vBw7A1eKO4jfrIIr3S_D9D3DTU_wqVQmqDYPWseU-kAYWIYmCKA3COA3W8fIjxdPZ4sap4IdoR_F2Egt7Eb8h3-qRu7sERf8KSmZBu1dBM-yvnwoTd5kvnW0lFzDAFtyAlCgsWA3nhKGxozYP7rpnh-3cIXpl8E7xS0sqTJ18y34LYEXRirYdlE33q5IFSGWFcXJYVPLBvdNVwwyz4EGpdVkJD8JgPA5pFWuGQSynGOc8D9rdhi5op_7XJjDFp-C3ZtPQyPu8fDhKe3ArdXacG0af-oHdjOtX2NOUc8G5ZLXD0cPSSI65NZ3wsBamZkOJ_aChOC4xxdz9cjbMmaqT0zRM_dS6fpEZ3ZUHzPesal3VNZxZcS3dnrN6Qo1QXJjPulMW82gTjyaY9_joynUWJKssXm3iDSFJlqYePmHukywJVpssXpMsI2lITh7-GWPDIFuTKF1lKXFfnKTR6RlQDhFh?type=png)](https://mermaid.live/edit#pako:eNqNUs9vmzAU_lee3imRAAUCOHDYVq1Sk0s3abtsdQ8edohVsJExSzuU_72GrIRWmlZ84X36fjw_vx4LzQXm6Ps-VYVWe1nmVAHYg6hFDkbw7nGoK_akO5sDZ6URVI30faWPxYEZC9-vBw7A1eKO4jfrIIr3S_D9D3DTU_wqVQmqDYPWseU-kAYWIYmCKA3COA3W8fIjxdPZ4sap4IdoR_F2Egt7Eb8h3-qRu7sERf8KSmZBu1dBM-yvnwoTd5kvnW0lFzDAFtyAlCgsWA3nhKGxozYP7rpnh-3cIXpl8E7xS0sqTJ18y34LYEXRirYdlE33q5IFSGWFcXJYVPLBvdNVwwyz4EGpdVkJD8JgPA5pFWuGQSynGOc8D9rdhi5op_7XJjDFp-C3ZtPQyPu8fDhKe3ArdXacG0af-oHdjOtX2NOUc8G5ZLXD0cPSSI65NZ3wsBamZkOJ_aChOC4xxdz9cjbMmaqT0zRM_dS6fpEZ3ZUHzPesal3VNZxZcS3dnrN6Qo1QXJjPulMW82gTjyaY9_joynUWJKssXm3iDSFJlqYePmHukywJVpssXpMsI2lITh7-GWPDIFuTKF1lKXFfnKTR6RlQDhFh)
 
+---
 
+## 📦 Requirements
+- Python **3.10+**
+- **PySide6**, **pywebview**, **qasync**
+- Windows 10+ users: [WebView2 runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
+- [PyInstaller](https://pyinstaller.org/) for building distributables
 
-## For get the windows app
+---
 
+## ⚙️ Build Instructions (Windows)
+To package the application into a distributable **.exe**:
 
 ```bash
-pyinstaller --noconfirm  --onefile --clean --name "Sharif Connect" main.py --hidden-import=qasync  --noconsole --windowed  --add-data "static;static"  --add-data ".env;."   --icon=static/images/SharifConnect.ico
+
+pyinstaller --noconfirm --onedir --clean --name "Sharif Connect" main.py  --hidden-import=qasync --noconsole --windowed  --add-data "static;static" --add-data ".env;."  --icon=static/images/SharifConnect.ico
+````
+
+---
+
+## 🚀 Run the App
+
+```bash
+python main.py
 ```
+
+---
+
+## 🧑‍💻 Contribution
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -m "add: my feature"`)
+4. Push and create a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+
