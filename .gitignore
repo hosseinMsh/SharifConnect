@@ -4,3 +4,8 @@
 out
 gen
 .env
+dist
+build
+config.toml
+sharif_config.enc
+Sharif Connect.spec

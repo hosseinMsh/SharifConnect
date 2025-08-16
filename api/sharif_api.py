@@ -103,8 +103,8 @@ class SharifConnectAPI:
     def info(self):
         """Get application and system information"""
         return {
-            'app_version': '1.0.0',
-            'build_date': '2024-01-15',
+            'app_version': '2.0.0',
+            'build_date': '2025-08-01',
             'platform': 'Windows',
             'python_version': '3.12+',
             'server_status': 'Online',

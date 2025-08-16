@@ -31,7 +31,7 @@ CONFIG_FILE = get_config_path()
 LOG_FILE = CONFIG_FILE.with_suffix(".log")
 LOGS_DIR = CONFIG_FILE.parent / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback_secret_key")
 if SECRET_KEY is None:
     raise ValueError("SECRET_KEY environment variable is not set")
 def get_system_identity():

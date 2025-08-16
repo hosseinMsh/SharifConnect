@@ -10,3 +10,12 @@
 ## Function states 
 [![](https://mermaid.ink/img/pako:eNqNUs9vmzAU_lee3imRAAUCOHDYVq1Sk0s3abtsdQ8edohVsJExSzuU_72GrIRWmlZ84X36fjw_vx4LzQXm6Ps-VYVWe1nmVAHYg6hFDkbw7nGoK_akO5sDZ6URVI30faWPxYEZC9-vBw7A1eKO4jfrIIr3S_D9D3DTU_wqVQmqDYPWseU-kAYWIYmCKA3COA3W8fIjxdPZ4sap4IdoR_F2Egt7Eb8h3-qRu7sERf8KSmZBu1dBM-yvnwoTd5kvnW0lFzDAFtyAlCgsWA3nhKGxozYP7rpnh-3cIXpl8E7xS0sqTJ18y34LYEXRirYdlE33q5IFSGWFcXJYVPLBvdNVwwyz4EGpdVkJD8JgPA5pFWuGQSynGOc8D9rdhi5op_7XJjDFp-C3ZtPQyPu8fDhKe3ArdXacG0af-oHdjOtX2NOUc8G5ZLXD0cPSSI65NZ3wsBamZkOJ_aChOC4xxdz9cjbMmaqT0zRM_dS6fpEZ3ZUHzPesal3VNZxZcS3dnrN6Qo1QXJjPulMW82gTjyaY9_joynUWJKssXm3iDSFJlqYePmHukywJVpssXpMsI2lITh7-GWPDIFuTKF1lKXFfnKTR6RlQDhFh?type=png)](https://mermaid.live/edit#pako:eNqNUs9vmzAU_lee3imRAAUCOHDYVq1Sk0s3abtsdQ8edohVsJExSzuU_72GrIRWmlZ84X36fjw_vx4LzQXm6Ps-VYVWe1nmVAHYg6hFDkbw7nGoK_akO5sDZ6URVI30faWPxYEZC9-vBw7A1eKO4jfrIIr3S_D9D3DTU_wqVQmqDYPWseU-kAYWIYmCKA3COA3W8fIjxdPZ4sap4IdoR_F2Egt7Eb8h3-qRu7sERf8KSmZBu1dBM-yvnwoTd5kvnW0lFzDAFtyAlCgsWA3nhKGxozYP7rpnh-3cIXpl8E7xS0sqTJ18y34LYEXRirYdlE33q5IFSGWFcXJYVPLBvdNVwwyz4EGpdVkJD8JgPA5pFWuGQSynGOc8D9rdhi5op_7XJjDFp-C3ZtPQyPu8fDhKe3ArdXacG0af-oHdjOtX2NOUc8G5ZLXD0cPSSI65NZ3wsBamZkOJ_aChOC4xxdz9cjbMmaqT0zRM_dS6fpEZ3ZUHzPesal3VNZxZcS3dnrN6Qo1QXJjPulMW82gTjyaY9_joynUWJKssXm3iDSFJlqYePmHukywJVpssXpMsI2lITh7-GWPDIFuTKF1lKXFfnKTR6RlQDhFh)
 
+
+
+## For get the windows app
+
+
+```bash
+pyinstaller --noconfirm  --onefile --clean --name "Sharif Connect" main.py --hidden-import=qasync  --noconsole --windowed  --add-data "static;static"  --add-data ".env;."   --icon=static/images/SharifConnect.ico
+```
+pyinstaller --noconfirm --onefile --clean --name "Sharif Connect" main.py --hidden-import=qasync --noconsole --windowed --add-data "static;static" --add-data ".env;." --icon=static/images/SharifConnect.ico

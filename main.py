@@ -25,8 +25,8 @@ if __name__ == '__main__':
         'Sharif Connect',
         str(html_file),
         width=700,
-        height=800,
-        resizable=True,
+        height=850,
+        resizable=False,
         js_api=sharif_api  # Use your existing API
     )
     
