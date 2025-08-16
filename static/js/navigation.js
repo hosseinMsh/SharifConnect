@@ -160,11 +160,9 @@ export class NavigationManager {
             if (state === 1 || state === 2) {
                 statusIndicator.className = "w-2 h-2 bg-sharif-green rounded-full"
                 connectionText.textContent = "متصل"
-                window.app.updateConnectionUI(true)
             } else {
                 statusIndicator.className = "w-2 h-2 bg-red-500 rounded-full"
                 connectionText.textContent = "قطع"
-                window.app.updateConnectionUI(false)
             }
         }
     }

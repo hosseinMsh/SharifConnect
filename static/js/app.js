@@ -242,7 +242,7 @@ class SharifConnectApp {
             if (this.isLoggedIn) {
                 this.updateConnectionState()
             }
-        }, 15000)
+        }, 10000)
     }
 
     updateDataUsage() {
