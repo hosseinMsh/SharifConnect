@@ -149,100 +149,101 @@ class SharifConnectAPI:
         }
 
 
-def disconnect(self):
-    """Disconnect from VPN"""
-    success = False
-    self.update_state()
-    if self.state == 0 or 3:
-        success, msg = True, ""
-    elif self.state == 1:  # vpn is on
-        success, msg = disconnect_vpn()
-    elif self.state == 2:  # connect in inside
-        success, msg = disconnect_current_session(self.username, self.password)
+    def disconnect(self):
+        """Disconnect from VPN"""
+        success = False
+        self.update_state()
+        if self.state == 0 or 3:
+            success, msg = True, ""
+        elif self.state == 1:  # vpn is on
+            success, msg = disconnect_vpn()
+        elif self.state == 2:  # connect in inside
+            success, msg = disconnect_current_session(self.username, self.password)
 
-    if success is True:
-        self.connected = False
-        return {
-            'success': True,
-            'status': 'disconnected',
-            'message': 'Disconnected from Sharif Connect',
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
-        }
-    return {'success': False, 'massage': 'Disconnect is not successful'}
-
-
-def disconnect_one_sessions(self, ras_ip, session_ip, session_id):
-    a, b, session = get_online_sessions(self.username, self.password)
-    if a is True:
-        success, msg = disconnect_session(session, ras_ip, session_ip, session_id)
         if success is True:
-            return {'success': True, 'messages': f'Disconnected IP: {session_ip}'}
+            self.connected = False
+            return {
+                'success': True,
+                'status': 'disconnected',
+                'message': 'Disconnected from Sharif Connect',
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+            }
+        return {'success': False, 'massage': 'Disconnect is not successful'}
+
+
+    def disconnect_one_sessions(self, ras_ip, session_ip, session_id):
+        print(ras_ip, session_ip, session_id)
+        a, b, session = get_online_sessions(self.username, self.password)
+        if a is True:
+            success, msg = disconnect_session(session, ras_ip, session_ip, session_id)
+            if success is True:
+                return {'success': True, 'messages': f'Disconnected IP: {session_ip}'}
+            else:
+                return {'success': False, 'messages': 'Disconnect is not successful'}
         else:
-            return {'success': False, 'messages': 'Disconnect is not successful'}
-    else:
-        return {'success': False, 'messages': 'Cant load sessions'}
+            return {'success': False, 'messages': 'Cant load sessions'}
 
 
-def change(self, new_username=None, new_password=None, current_password=None):
-    """Change username or password"""
-    if not self.logged_in:
-        return {'success': False, 'message': 'Not logged in'}
+    def change(self, new_username=None, new_password=None, current_password=None):
+        """Change username or password"""
+        if not self.logged_in:
+            return {'success': False, 'message': 'Not logged in'}
 
-    # Verify current password for security
-    if current_password != self.password:
-        return {'success': False, 'message': 'Current password is incorrect'}
+        # Verify current password for security
+        if current_password != self.password:
+            return {'success': False, 'message': 'Current password is incorrect'}
 
-    changes_made = []
+        changes_made = []
 
-    if new_username:
-        self.username = new_username
-        changes_made.append('username')
+        if new_username:
+            self.username = new_username
+            changes_made.append('username')
 
-    if new_password:
-        self.password = new_password
-        changes_made.append('password')
-    save_config(
-        {"username": self.username, "password": self.password, "remember": True})  # Todo : add remember me in front
-    if changes_made:
+        if new_password:
+            self.password = new_password
+            changes_made.append('password')
+        save_config(
+            {"username": self.username, "password": self.password, "remember": True})  # Todo : add remember me in front
+        if changes_made:
+            return {
+                'success': True,
+                'message': f'Successfully updated {", ".join(changes_made)}',
+                'changes': changes_made
+            }
+
+        return {'success': False, 'message': 'No changes specified'}
+
+
+    def get_logs(self):
+        """Get application logs"""
+        success, data = get_bandwidth_logs(self.usename, self.password)
+        if success is False:
+            return {'success': False, 'message': 'Cant get logs'}
         return {
             'success': True,
-            'message': f'Successfully updated {", ".join(changes_made)}',
-            'changes': changes_made
+            'data': data
         }
 
-    return {'success': False, 'message': 'No changes specified'}
+
+    def get_settings(self):
+        """Get current settings"""
+        return {
+            'auto_connect': False,
+            'kill_switch': True,
+            'start_with_os': False,  # Start with OS option
+            'notifications': True,
+            'auto_update': True,
+            'language': self.current_language,
+            'theme': 'auto'
+        }
 
 
-def get_logs(self):
-    """Get application logs"""
-    success, data = get_bandwidth_logs(self.usename, self.password)
-    if success is False:
-        return {'success': False, 'message': 'Cant get logs'}
-    return {
-        'success': True,
-        'data': data
-    }
-
-
-def get_settings(self):
-    """Get current settings"""
-    return {
-        'auto_connect': False,
-        'kill_switch': True,
-        'start_with_os': False,  # Start with OS option
-        'notifications': True,
-        'auto_update': True,
-        'language': self.current_language,
-        'theme': 'auto'
-    }
-
-
-def update_settings(self, settings):
-    """Update application settings"""
-    # Here you would typically save settings to a file or registry
-    # For now, we'll just return success
-    return {
-        'success': True,
-        'message': 'Settings updated successfully',
-        'settings': settings
-    }
+    def update_settings(self, settings):
+        """Update application settings"""
+        # Here you would typically save settings to a file or registry
+        # For now, we'll just return success
+        return {
+            'success': True,
+            'message': 'Settings updated successfully',
+            'settings': settings
+        }
