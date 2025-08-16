@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 LOGIN_URL = "https://accounts.sharif.edu/cas/login"
-USER_URL = "https://register.sharif.edu/profile/index/User"
+USER_URL = "https://register.sharif.edu/profile"
 
 def get_data(username, password):
     session = requests.Session()
@@ -21,11 +21,11 @@ def get_data(username, password):
         'geolocation': ''
     }
     session.post(LOGIN_URL, data=data,allow_redirects=True)
-    response = session.get(url=f"{LOGIN_URL}?service=https://register.sharif.edu/profile",allow_redirects=True)
+    session.get(url=f"{LOGIN_URL}?service=https://register.sharif.edu/profile",allow_redirects=True)
+    response =  session.get(USER_URL)
     if response.status_code != requests.codes.ok:
         return False, {}
     soup = BeautifulSoup(response.text, 'html.parser')
-
     return  True , {
         "fullname": soup.find('input', attrs={'name': 'cn'})['value'],
         "fullname_en": soup.find('input', attrs={'name': 'cn;lang-en-US'})['value'],
