@@ -111,7 +111,7 @@ class SharifConnectApp {
                     this.updateConnectionUI(false)
                     Utils.showNotification("اتصال قطع شد", "info")
                     const currentIpElement = document.getElementById("current-ip")
-                    if (currentIpElement ) {
+                    if (currentIpElement) {
                         currentIpElement.textContent = `آی‌پی شما: ---,---,---,---`
                     }
                 }
@@ -140,7 +140,12 @@ class SharifConnectApp {
         const statusIndicator = document.getElementById("status-indicator")
         const connectionText = document.getElementById("connection-text")
         const protectionCircle = document.getElementById("protection-circle")
-
+        const currentIpElement = document.getElementById("current-ip")
+        window.pywebview.api.current_ip().then((current_ip) => {
+            if (currentIpElement && current_ip.success && connected) {
+                currentIpElement.textContent = `آی‌پی شما: ${current_ip.ip}`
+            }
+        })
         if (toggleElement) {
             const toggleButton = toggleElement.querySelector("div")
             if (connected) {
@@ -159,6 +164,7 @@ class SharifConnectApp {
         if (connectionText) {
             connectionText.textContent = connected ? "متصل" : "قطع شده"
         }
+
 
         if (protectionCircle) {
             protectionCircle.className = connected
@@ -230,6 +236,9 @@ class SharifConnectApp {
     }
 
     startPeriodicUpdates() {
+        if (this.isLoggedIn) {
+                this.updateConnectionState()
+            }
         // Update data usage every 5 seconds when connected
         setInterval(() => {
             if (this.isConnected) {
@@ -242,7 +251,7 @@ class SharifConnectApp {
             if (this.isLoggedIn) {
                 this.updateConnectionState()
             }
-        }, 10000)
+        }, 3000)
     }
 
     updateDataUsage() {
@@ -259,22 +268,22 @@ class SharifConnectApp {
     }
 
     async updateConnectionState() {
-    try {
-        if (typeof window.pywebview !== "undefined") {
-            const state = await window.pywebview.api.update_state()
-            this.connectionState = state
-            navigationManager.updateConnectionStatus(state)
+        try {
+            if (typeof window.pywebview !== "undefined") {
+                const state = await window.pywebview.api.update_state()
+                this.connectionState = state
+                navigationManager.updateConnectionStatus(state)
 
-            if (state === 1 || state === 2) {
-                this.updateConnectionUI(true)
-            } else {
-                this.updateConnectionUI(false)
+                if (state === 1 || state === 2) {
+                    this.updateConnectionUI(true)
+                } else {
+                    this.updateConnectionUI(false)
+                }
             }
+        } catch (error) {
+            console.error("Failed to update connection state:", error)
         }
-    } catch (error) {
-        console.error("Failed to update connection state:", error)
     }
-}
 
 }
 

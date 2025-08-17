@@ -149,6 +149,13 @@ class SharifConnectAPI:
             'ip': get_ip_address(),
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
         }
+    def current_ip(self):
+        if not self.logged_in:
+            return {'success': False, 'message': 'Please login again'}
+        if self.state == 2 or self.state == 1:
+            return {'success': True, 'ip': get_ip_address()}
+        else:
+            return {'success': False, 'message': 'You are not connected to Sharif Connect'}
 
     def disconnect(self):
         """Disconnect from VPN"""
